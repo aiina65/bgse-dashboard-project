@@ -14,25 +14,31 @@
 	<h2>Data</h2>
 	
 	<p>In this section we carry out an initial analysis of past transactions, with the objective of gathering information about the categories, products and customers that tend to generate the highest revenues. The results shown in this page can provide insights to inform the activities of the sales team. This information, together with the recommendation system and customer analysis which we have implemented in the next page, can support the activities of the company's marketing team.</p>
-/*	
-	<p> The chart below shows the best selling products ranked according to the revenues they generate. Only the top 10 best selling products are shown.</p>
+	
+	<p> The chart below shows the 10 best teams of the history.</p>
 
 <?php
-    // Total Revenue by product
+    // Teams, winned games
     
-    $query = "SELECT ProductName, Revenue FROM ecommerce.ProductsVsCustomers_Pivot ORDER BY Revenue DESC limit 10";
-    $title = "Products by revenues";
-    query_and_print_graph($query,$title,"Euros");
+    $query = "SELECT t.TeamName, avg(m.LeaguePoints)
+              FROM Project.MatchStat AS m, Project.Teams AS t 
+              WHERE m.TeamID = t.TeamID
+              GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) DESC LIMIT 10";
+    $title = "Top Best Teams";
+    query_and_print_graph($query,$title,"Average League Points");
 ?>
 	
-	<p>The chart below shows the results of a similar analysis, this time to rank the customers that contribute the most to total revenues. Only the top 20 customers are shown below.</p>
+	<p>The chart below shows the results of a similar analysis, this time the 10 worst teams of the history.</p>
 	
 <?php
 	// Page body. Write here your queries
 	
-	$query = "SELECT b.CustomerID Customer, sum(a.Quantity*a.UnitPrice) Revenues from ecommerce.order_details a left join ecommerce.orders b on a.OrderID=b.OrderID group by CustomerID order by Revenues desc limit 20";
-	$title = "Customers by revenues";
-	query_and_print_graph($query,$title,"Euros");
+	$query = "SELECT t.TeamName, avg(m.LeaguePoints)
+                  FROM Project.MatchStat AS m, Project.Teams AS t 
+                  WHERE m.TeamID = t.TeamID 
+                  GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) ASC LIMIT 10";
+        $title = "Top Worst Teams";
+	query_and_print_graph($query,$title,"Average League Points");
 ?>
 
 	<p>Once we have identified the best selling products and the top customers, we seek to improve our understanding of the relationships between them.</p>
