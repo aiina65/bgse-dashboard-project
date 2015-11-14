@@ -69,7 +69,7 @@ BSA int(3)
 
 );
 
-LOAD DATA LOCAL INFILE '/Users/ainalopez/Desktop/DW - CL project/Datafiles/GeneralTable.csv' 
+LOAD DATA LOCAL INFILE 'data/GeneralTable.csv' 
 INTO TABLE GeneralTable 
 FIELDS TERMINATED BY ',' 
 LINES TERMINATED BY '\n';
