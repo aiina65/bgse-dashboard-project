@@ -83,7 +83,7 @@ function show_content(optionsId) {
 	
 	</div>
 
-	<div id="footer">Project team: Gaston Besanson, Stefano Costantini, Laura Cozma, Jordi Zamora Munt</div>
+	<div id="footer">Project team: Kseniya Bout, Andreas Lloyd, Aina Lopez</div>
 
 </body>
 </html>

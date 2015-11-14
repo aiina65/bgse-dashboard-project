@@ -15,9 +15,10 @@ case $cmd in
 install)
 	echo "Installing"
 
-	mysql -u $user -p$pswd < db/ecommerce.sql
-	mysql -u $user -p$pswd < data/ecommerce-dump.sql
-	mysql -u $user -p$pswd < analysis/Customers_by_product.sql
+	mysql -u $user -p$pswd < db/football.sql
+	mysql -u $user -p$pswd < data/GeneralTable_dump.sql
+    mysql -u $user -p$pswd < data/football_functions_procedures.sql
+	mysql -u $user -p$pswd < data/football_dump.sql
 
 	mkdir -p "$target_dir/MyApp"
 	cp -rf web/* "$target_dir/MyApp"
@@ -28,7 +29,7 @@ install)
 uninstall)
 	echo "Uninstalling"
 	
-	mysql -u $user -p$pswd -e "DROP DATABASE ecommerce;" 
+	mysql -u $user -p$pswd -e "DROP DATABASE Project;"
 	rm -rf "target_dir/MyApp"
 
 	echo "done!"
@@ -36,10 +37,10 @@ uninstall)
 
 run)
 	echo "Running"
-	R CMD BATCH analysis/analysis.R 
-	cat analysis.Rout
-	rm analysis.Rout
-	cp web/categories_network.png "$target_dir/MyApp"
+    # R CMD BATCH analysis/analysis.R
+    # cat analysis.Rout
+    # rm analysis.Rout
+    # cp web/categories_network.png "$target_dir/MyApp"
 
 	;;
 
