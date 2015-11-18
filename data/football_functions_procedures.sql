@@ -59,6 +59,11 @@ BEGIN
     else set success = 0;
     end if;
     
+    if hw IS NULL then set success = NULL;
+    elseif aw IS NULL then set success = NULL;
+    elseif dw IS NULL then set success = NULL;
+    end if;
+    
     RETURN success;
 END //
 DELIMITER ;
