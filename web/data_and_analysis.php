@@ -82,10 +82,9 @@ WHERE ms.HomeAway = 'A'";
 
 
 <?php
-    // Teams, winned games
+    // Time series
     
-    $query = "SELECT avg(ms.LeaguePoints), ms.TeamID
-FROM Project.Matches AS m, Project.MatchStat AS ms
+    $query = "SELECT ms.TeamID, avg(ms.LeaguePoints) FROM Project.Matches AS m, Project.MatchStat AS ms
 WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT * FROM (SELECT m.TeamID
 																FROM Project.MatchStat AS m GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) DESC LIMIT 1) AS temp1)
 GROUP BY ms.TeamID, m.Season";
