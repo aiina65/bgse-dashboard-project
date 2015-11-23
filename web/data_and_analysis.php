@@ -13,7 +13,7 @@
 	
 	<h2>Data</h2>
 	
-	<p>In this section we carry out an initial analysis of past transactions, with the objective of gathering information about the categories, products and customers that tend to generate the highest revenues. The results shown in this page can provide insights to inform the activities of the sales team. This information, together with the recommendation system and customer analysis which we have implemented in the next page, can support the activities of the company's marketing team.</p>
+	<p>Blablabla</p>
 	
 	<p> The chart below shows the 10 best teams of the history.</p>
 
@@ -27,6 +27,8 @@
     $title = "Top Best Teams";
     query_and_print_graph($query,$title,"Average League Points");
 ?>
+
+
 	
 	<p>The chart below shows the results of a similar analysis, this time the 10 worst teams of the history.</p>
 	
@@ -41,7 +43,7 @@
 	query_and_print_graph($query,$title,"Average League Points");
 ?>
 
-	<p>Once we have identified the best selling products and the top customers, we seek to improve our understanding of the relationships between them.</p>
+	<p>Blablabla.</p>
 
 <?php
 	// Page body. Write here your queries
@@ -53,15 +55,37 @@
 	query_and_print_graph($query,$title,"Prediction Success");
 ?>
 
+	<p>Blablabla.</p>
+
+<?php
+	// Page body. Write here your queries
+	
+	$query = "SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
+FROM Project.MatchStat AS ms
+WHERE ms.HomeAway = 'H'";
+        $title = "Prediction Success of the Betting Companies";
+	query_and_print_table($query,$title,"Average Statistics of teams playing at home");
+?>
+
+<?php
+	// Page body. Write here your queries
+	
+	$query = "SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
+FROM Project.MatchStat AS ms
+WHERE ms.HomeAway = 'A'";
+        $title = "Prediction Success of the Betting Companies";
+	query_and_print_table($query,$title,"Average Statistics of teams playing away");
+?>
+
+
+
+
 	  
 	</div>
 	<div id="analysis" style="display: none">
 	<h2>Analysis</h2>
 	  
-	<p>Below we show the top 20 product recommendation rules identified by the <b>Apriori algorithm</b>. The table can be read as follows: for each rule, the left-hand side shows a potential basket that the customer has put together, while the right-hand side shows the additional product that could be purchased to "complete that basket".</p>
-
-	<p>For example, the first rule indicates that a customer that has already added dried applies and sild (herring) to her basket, would be recommended gorgonzola cheese <em>(note: it sounds disgusting but the customer is always right!)</em> The recommendations are based on the analysis of historical transaction already stored in the database.</p>
-	   
+	<p>Blablabla.</p>
 
 		</div>
 <?php
