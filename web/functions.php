@@ -130,7 +130,7 @@ MY_MARKER;
 
 }
 
-function query_and_print_series($query, $query2, $title, $label, $label2) {
+function query_and_print_series($query, $title,$label) {
     $id = "graph" . $GLOBALS['graphid'];
     $GLOBALS['graphid'] = $GLOBALS['graphid'] + 1;
     
@@ -139,7 +139,7 @@ function query_and_print_series($query, $query2, $title, $label, $label2) {
 
     // Perform Query
     $result = mysql_query($query);
-    $result2 = mysql_query($query2);
+
 
     // Check result
     // This shows the actual query sent to MySQL, and the error. Useful for debugging.
@@ -187,14 +187,10 @@ MY_MARKER;
     $str = $str . PHP_EOL . $id . "Chart();" . PHP_EOL;
     $str = $str . PHP_EOL . "mycharts.push(". $id . "Chart)" . PHP_EOL;
     $str = $str . PHP_EOL . "function " . $id . "Data() { 
-    var fx = [], var fx2 = [];";
+    var fx = [];";
   
-    while ($row = mysql_fetch_array($result)) {
+    while ($row = mysql_fetch_array($resul1)) {
         $str = $str . "fx.push({x:" . $row[0] . ", y:" . $row[1] ."}); " . PHP_EOL;
-    }
-
-    while ($row = mysql_fetch_array($result2)) {
-        $str = $str . "fx2.push({x:" . $row[0] . ", y:" . $row[1] ."}); " . PHP_EOL;
     }
 
     $str = $str . "
@@ -205,13 +201,7 @@ MY_MARKER;
       key: '" . $label . " ',
       color: '#7777ff',
       area: false      //area - set to true if you want this line to turn into a filled area chart.
-    },
-    {
-      values: fx2,
-      key: '" . $label2 . " ',
-      color: '#ff7f0e',
-      area: false      //area - set to true if you want this line to turn into a filled area chart.
-    },
+    }
 
   ];
 }</script>";
