@@ -102,7 +102,7 @@ GROUP BY ms.TeamID, m.Season LIMIT 1";
 
 
     $title = "Line";
-query_and_print_series($query1, $query2 ,$title,$label1,$label2");
+query_and_print_series($query1,$title,$label1);
 ?>
 
 
