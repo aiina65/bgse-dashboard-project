@@ -29,6 +29,22 @@
 ?>
 
 
+
+<?php
+    // Teams, winned games
+    
+    $query = "SELECT avg(ms.LeaguePoints), ms.TeamID
+FROM Project.Matches AS m, Project.MatchStat AS ms
+WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT * FROM (SELECT m.TeamID
+																FROM Project.MatchStat AS m GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) DESC LIMIT 10) AS temp1)
+GROUP BY ms.TeamID, m.Season";
+
+
+    $title = "Line";
+    query_and_print_series($query,$title,"Average League Points");
+?>
+
+
 	
 	<p>The chart below shows the results of a similar analysis, this time the 10 worst teams of the history.</p>
 	
