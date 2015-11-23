@@ -130,7 +130,7 @@ MY_MARKER;
 
 }
 
-function query_and_print_series($query,$title,$label) {
+function query_and_print_series($query1, $query2, $title,$label1, $label2) {
     $id = "graph" . $GLOBALS['graphid'];
     $GLOBALS['graphid'] = $GLOBALS['graphid'] + 1;
     
@@ -138,11 +138,12 @@ function query_and_print_series($query,$title,$label) {
     echo PHP_EOL,'<div align="center" id="'. $id . '"><svg style="height:500px; width:800px"></svg></div>',PHP_EOL;
 
     // Perform Query
-    $result = mysql_query($query);
+    $result1 = mysql_query($query1);
+    $result2 = mysql_query($query2);
 
     // Check result
     // This shows the actual query sent to MySQL, and the error. Useful for debugging.
-    if (!$result) {
+    if (!$result1) {
         $message  = 'Invalid query: ' . mysql_error() . "\n";
         $message .= 'Whole query: ' . $query;
         die($message);
@@ -186,21 +187,38 @@ MY_MARKER;
     $str = $str . PHP_EOL . $id . "Chart();" . PHP_EOL;
     $str = $str . PHP_EOL . "mycharts.push(". $id . "Chart)" . PHP_EOL;
     $str = $str . PHP_EOL . "function " . $id . "Data() { 
-    var fx = [];";
+    var fx1 = [];";
   
-    while ($row = mysql_fetch_array($result)) {
-        $str = $str . "fx.push({x:" . $row[0] . ", y:" . $row[1] ."}); " . PHP_EOL;
-    }    
+    while ($row = mysql_fetch_array($resul1)) {
+        $str = $str . "fx1.push({x:" . $row[0] . ", y:" . $row[1] ."}); " . PHP_EOL;
+    }
+
+$str = $str . PHP_EOL . $id . "Chart();" . PHP_EOL;
+    $str = $str . PHP_EOL . "mycharts.push(". $id . "Chart)" . PHP_EOL;
+    $str = $str . PHP_EOL . "function " . $id . "Data() { 
+    var fx2 = [];";
+  
+    while ($row = mysql_fetch_array($result2)) {
+        $str = $str . "fx2.push({x:" . $row[0] . ", y:" . $row[1] ."}); " . PHP_EOL;
+    }
+
 
     $str = $str . "
     //Line chart data should be sent as an array of series objects.
     return [
     {
-      values: fx,
-      key: '" . $label . " ',
+      values: fx1,
+      key: '" . $label1 . " ',
       color: '#7777ff',
-      area: true      //area - set to true if you want this line to turn into a filled area chart.
+      area: false      //area - set to true if you want this line to turn into a filled area chart.
+    }, 
+    {
+      values: fx2,
+      key: '" . $label2 . " ',
+      color: '#2ca02c',
+      area: false      //area - set to true if you want this line to turn into a filled area chart.
     }
+
   ];
 }</script>";
 

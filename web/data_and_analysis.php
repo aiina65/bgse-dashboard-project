@@ -84,18 +84,25 @@ WHERE ms.HomeAway = 'A'";
 <?php
     // Time series
     
-    $query = "SELECT m.Season, avg(ms.LeaguePoints) FROM Project.Matches AS m, Project.MatchStat AS ms
-WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT * FROM (SELECT m.TeamID
-																FROM Project.MatchStat AS m GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) DESC LIMIT 2) AS temp1)
+    $query1 = "SELECT m.Season, avg(ms.LeaguePoints) FROM Project.Matches AS m, Project.MatchStat AS ms
+WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT * FROM (SELECT m.TeamID FROM Project.MatchStat AS m GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) DESC LIMIT 1) AS temp1)
 GROUP BY ms.TeamID, m.Season";
-    $label = "SELECT  m.TeamID FROM Project.Matches AS m, Project.MatchStat AS ms
-WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT * FROM (SELECT m.TeamID
-																FROM Project.MatchStat AS m GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) DESC LIMIT 2) AS temp1)
+
+    $query2 = "SELECT m.Season, avg(ms.LeaguePoints) FROM Project.Matches AS m, Project.MatchStat AS ms
+WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT * FROM (SELECT m.TeamID FROM Project.MatchStat AS m GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) DESC LIMIT 1) AS temp1)
 GROUP BY ms.TeamID, m.Season";
+
+    $label1 = "SELECT  m.TeamID FROM Project.Matches AS m, Project.MatchStat AS ms
+WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT * FROM (SELECT m.TeamID FROM Project.MatchStat AS m GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) DESC LIMIT 2) AS temp1)
+GROUP BY ms.TeamID, m.Season LIMIT 1";
+
+    $label2 = "SELECT  m.TeamID FROM Project.Matches AS m, Project.MatchStat AS ms
+WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT * FROM (SELECT m.TeamID FROM Project.MatchStat AS m GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) DESC LIMIT 2) AS temp1)
+GROUP BY ms.TeamID, m.Season LIMIT 1";
 
 
     $title = "Line";
-    query_and_print_series($query,$title,$lable");
+query_and_print_series($query1, $query2 ,$title,$label1,$label2");
 ?>
 
 
