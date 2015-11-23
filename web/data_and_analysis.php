@@ -88,12 +88,12 @@ WHERE ms.HomeAway = 'A'";
 WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT * FROM (SELECT m.TeamID FROM Project.MatchStat AS m GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) DESC LIMIT 1) AS temp1)
 GROUP BY ms.TeamID, m.Season";
 
-    $label = "SELECT  m.TeamID FROM Project.Matches AS m, Project.MatchStat AS ms
-WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT * FROM (SELECT m.TeamID FROM Project.MatchStat AS m GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) DESC LIMIT 1) AS temp1)
-GROUP BY ms.TeamID, m.Season LIMIT 1";
+$query2 = "SELECT m.Season, avg(ms.LeaguePoints) FROM Project.Matches AS m, Project.MatchStat AS ms
+WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT * FROM (SELECT m.TeamID FROM Project.MatchStat AS m GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) ASC LIMIT 1) AS temp1)
+GROUP BY ms.TeamID, m.Season";
 
     $title = "Line";
-query_and_print_series($query,$title,"Best Team");
+query_and_print_series($query,$query2,$title,"Best Team", "Worst Team");
 ?>
 
 
