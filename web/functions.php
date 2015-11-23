@@ -189,7 +189,7 @@ MY_MARKER;
     $str = $str . PHP_EOL . "function " . $id . "Data() { 
     var fx = [];";
   
-    while ($row = mysql_fetch_array($resul1)) {
+    while ($row = mysql_fetch_array($result)) {
         $str = $str . "fx.push({x:" . $row[0] . ", y:" . $row[1] ."}); " . PHP_EOL;
     }
 
