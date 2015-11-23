@@ -84,25 +84,16 @@ WHERE ms.HomeAway = 'A'";
 <?php
     // Time series
     
-    $query1 = "SELECT m.Season, avg(ms.LeaguePoints) FROM Project.Matches AS m, Project.MatchStat AS ms
+    $query = "SELECT m.Season, avg(ms.LeaguePoints) FROM Project.Matches AS m, Project.MatchStat AS ms
 WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT * FROM (SELECT m.TeamID FROM Project.MatchStat AS m GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) DESC LIMIT 1) AS temp1)
 GROUP BY ms.TeamID, m.Season";
 
-    $query2 = "SELECT m.Season, avg(ms.LeaguePoints) FROM Project.Matches AS m, Project.MatchStat AS ms
+    $label = "SELECT  m.TeamID FROM Project.Matches AS m, Project.MatchStat AS ms
 WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT * FROM (SELECT m.TeamID FROM Project.MatchStat AS m GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) DESC LIMIT 1) AS temp1)
-GROUP BY ms.TeamID, m.Season";
-
-    $label1 = "SELECT  m.TeamID FROM Project.Matches AS m, Project.MatchStat AS ms
-WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT * FROM (SELECT m.TeamID FROM Project.MatchStat AS m GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) DESC LIMIT 2) AS temp1)
 GROUP BY ms.TeamID, m.Season LIMIT 1";
-
-    $label2 = "SELECT  m.TeamID FROM Project.Matches AS m, Project.MatchStat AS ms
-WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT * FROM (SELECT m.TeamID FROM Project.MatchStat AS m GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) DESC LIMIT 2) AS temp1)
-GROUP BY ms.TeamID, m.Season LIMIT 1";
-
 
     $title = "Line";
-query_and_print_series($query1,$title,$label1);
+query_and_print_series($query,$title,$label);
 ?>
 
 
