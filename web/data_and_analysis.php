@@ -49,8 +49,8 @@
 	// Page body. Write here your queries
 	
 	$query = "SELECT b.CompanyCode, avg(b.PredictionSuccess) AS Prediction
-                  FROM Project.Bets AS b 
-                  GROUP BY b.CompanyCode ORDER BY avg(b.PredictionSuccess) DESC";
+              FROM Project.Bets AS b 
+              GROUP BY b.CompanyCode ORDER BY avg(b.PredictionSuccess) DESC";
         $title = "Prediction Success of the Betting Companies";
 	query_and_print_graph($query,$title,"Prediction Success");
 ?>
