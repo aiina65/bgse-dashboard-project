@@ -43,6 +43,16 @@
 
 	<p>Once we have identified the best selling products and the top customers, we seek to improve our understanding of the relationships between them.</p>
 
+<?php
+	// Page body. Write here your queries
+	
+	$query = "SELECT b.CompanyCode, avg(b.PredictionSuccess) AS Prediction
+                  FROM Project.Bets AS b 
+                  GROUP BY b.CompanyCode ORDER BY avg(b.PredictionSuccess) DESC";
+        $title = "Prediction Success of the Betting Companies";
+	query_and_print_graph($query,$title,"Prediction Success");
+?>
+
 	  
 	</div>
 	<div id="analysis" style="display: none">
