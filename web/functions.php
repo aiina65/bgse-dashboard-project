@@ -194,7 +194,7 @@ MY_MARKER;
     }
 
     while ($row = mysql_fetch_array($result2)) {
-        $str = $str . "fx.push({x:" . $row[0] . ", y:" . $row[1] ."}); " . PHP_EOL;
+        $str = $str . "fx2.push({x:" . $row[0] . ", y:" . $row[1] ."}); " . PHP_EOL;
     }
 
     $str = $str . "
