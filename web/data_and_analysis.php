@@ -93,7 +93,7 @@ WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT * FROM (SELECT m.TeamID FR
 GROUP BY ms.TeamID, m.Season LIMIT 1";
 
     $title = "Line";
-query_and_print_series($query,$title,$label);
+query_and_print_series($query,$title,"Best Team");
 ?>
 
 
