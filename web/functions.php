@@ -155,7 +155,8 @@ function query_and_print_circular_graph($query,$title) {
       var chart = nv.models.pieChart()
        .x(function(d) { return d.label })
        .y(function(d) { return d.value })
-       .showLabels(true) ;
+       .showLabels(true)
+       .labelType("percent");
   
 MY_MARKER;
     $str = $str . PHP_EOL . "d3.select('#" . $id . " svg')
@@ -163,7 +164,7 @@ MY_MARKER;
           .transition().duration(350)
           .call(chart);";
     $str = $str . <<<MY_MARKER
-
+ nv.utils.windowResize(chart.update);
       return chart;
     });
 }    
