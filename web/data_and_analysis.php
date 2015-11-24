@@ -56,7 +56,7 @@
                   FROM Project.MatchStat AS m, Project.Teams AS t 
                   WHERE m.TeamID = t.TeamID 
                   GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) ASC LIMIT 10";
-        $title = "Top Worst Teams";
+        $title = "Top Teams";
        query_and_print_multiple_graph($query,$query2,$title,"Average League Points");
 ?>
 
