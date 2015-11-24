@@ -266,82 +266,40 @@ MY_MARKER;
  return  [ 
     {
       "key": "Belgium"'; 
-    $str = $str . ', values: [';
+    $str = $str . ', values: ' . $result;
 
-    while ($row = mysql_fetch_array($result)) {
-        $str = $str . '{ "value":"' . $row[0] '},' . PHP_EOL;
-    }
-    $str = $str . '] }, {
+    $str = $str . ' }, {
     "key": "Holland" ';
-    $str = $str . ', values: [';
+    $str = $str . ', values: ' . $result2;
 
-    while ($row = mysql_fetch_array($result2)) {
-        $str = $str . '{ "value":"' . $row[0] '},' . PHP_EOL;
-    }
-    $str = $str . '] }, {
+    $str = $str . ' }, {
     "key": "England" ';
-    $str = $str . ', values: [';
-
-    while ($row = mysql_fetch_array($result3)) {
-        $str = $str . '{ "value":"' . $row[0] '},' . PHP_EOL;
-    }
-    $str = $str . '] }, {
+    $str = $str . ', values: ' . $result3;
+    $str = $str . ' }, {
     "key": "France" ';
-    $str = $str . ', values: [';
-
-    while ($row = mysql_fetch_array($result4)) {
-        $str = $str . '{ "value":"' . $row[0] '},' . PHP_EOL;
-    }
-    $str = $str . '] }, {
+    $str = $str . ', values: ' . $result4;
+    $str = $str . ' }, {
     "key": "Germany" ';
-    $str = $str . ', values: [';
-
-    while ($row = mysql_fetch_array($result5)) {
-        $str = $str . '{ "value":"' . $row[0] '},' . PHP_EOL;
-    }
-    $str = $str . '] }, {
+    $str = $str . ', values: ' . $result5;
+    $str = $str . ' }, {
     "key": "Greece" ';
-    $str = $str . ', values: [';
-
-    while ($row = mysql_fetch_array($result6)) {
-        $str = $str . '{ "value":"' . $row[0] '},' . PHP_EOL;
-    }
-    $str = $str . '] }, {
+    $str = $str . ', values: ' . $result6;
+    $str = $str . ' }, {
     "key": "Italy" ';
-    $str = $str . ', values: [';
-
-    while ($row = mysql_fetch_array($result7)) {
-        $str = $str . '{ "value":"' . $row[0] '},' . PHP_EOL;
-    }
-    $str = $str . '] }, {
+    $str = $str . ', values: ' . $result7;
+    $str = $str . ' }, {
     "key": "Portugal" ';
-    $str = $str . ', values: [';
-
-    while ($row = mysql_fetch_array($result8)) {
-        $str = $str . '{ "value":"' . $row[0]  '},' . PHP_EOL;
-    }
-    $str = $str . '] }, {
+    $str = $str . ', values: ' . $result8;
+    $str = $str . ' }, {
     "key": "Scotland" ';
-    $str = $str . ', values: [';
-
-    while ($row = mysql_fetch_array($result9)) {
-        $str = $str . '{ "value":"' . $row[0]  '},' . PHP_EOL;
-    }
-    $str = $str . '] }, {
+    $str = $str . ', values: ' . $result9;
+    $str = $str . ' }, {
     "key": "Spain" ';
-    $str = $str . ', values: [';
-
-    while ($row = mysql_fetch_array($result10)) {
-        $str = $str . '{ "value":"' . $row[0]  '},' . PHP_EOL;
-    }
-    $str = $str . '] }, {
+    $str = $str . ', values: ' . $result10;
+    $str = $str . ' }, {
     "key": "Turkey" ';
-    $str = $str . ', values: [';
-
-    while ($row = mysql_fetch_array($result11)) {
-        $str = $str . '{ "value":"' . $row[0] '},' . PHP_EOL;
-    }
-    $str = $str . '] } ] }</script>';
+    $str = $str . ', values: ' . $result11;
+    $str = $str . '} ] }</script>';
     echo $str;
 }
 
