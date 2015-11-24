@@ -235,19 +235,21 @@ function query_and_print_group_graph($query,$query2,$query3,$query4,$query5,$que
     $str = "<script type='text/javascript'>
         function " . $id . "Chart() {";
     $str = $str . <<<MY_MARKER
-   nv.addGraph(function() {
-    var chart = nv.models.multiBarHorizontalChart()
-        .x(function(d) { return d.label })
-        .y(function(d) { return d.value })
-        .margin({top: 30, right: 20, bottom: 50, left: 175})
-        .showValues(true)           //Show bar value next to each bar.
-        .tooltips(true)             //Show tooltips on hover.
-        .transitionDuration(350)
-        .showControls(true);
+  nv.addGraph(function() {
+    var chart = nv.models.multiBarChart()
+      .transitionDuration(350)
+      .reduceXTicks(true)   //If 'false', every single x-axis tick label will be rendered.
+      .rotateLabels(0)      //Angle to rotate x-axis labels.
+      .showControls(true)   //Allow user to switch between 'Grouped' and 'Stacked' mode.
+      .groupSpacing(0.1)    //Distance between each group of bars.
+    ;
 
-    chart.yAxis     //Chart y-axis settings
-      .axisLabel('Y')
-      .tickFormat(d3.format('.0f'));
+    chart.xAxis
+        .tickFormat(d3.format(',f'));
+
+    chart.yAxis
+        .tickFormat(d3.format(',.1f'));
+
     
 MY_MARKER;
     $str = $str . PHP_EOL . 'chart.yAxis.axisLabel("' . $ylabel . '").axisLabelDistance(30)';
