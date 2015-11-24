@@ -120,53 +120,53 @@
 <?php
 	// Page body. Write here your queries
 	
-	$query = "SELECT  b.CompanyCode, avg(b.PredictionSuccess) AS Prediction
+	$query = "SELECT  avg(b.PredictionSuccess) AS Prediction
                   FROM Project.Bets AS b, Project.Matches AS m, Project.Leagues AS l
                   WHERE b.MatchID = m.MatchID AND m.LeagueID = l.LeagueID AND l.Country = 'Belgian'
                   GROUP BY b.CompanyCode ORDER BY avg(b.PredictionSuccess) DESC";
-	$query2 = "SELECT  b.CompanyCode, avg(b.PredictionSuccess) AS Prediction
+	$query2 = "SELECT  avg(b.PredictionSuccess) AS Prediction
                   FROM Project.Bets AS b, Project.Matches AS m, Project.Leagues AS l
                   WHERE b.MatchID = m.MatchID AND m.LeagueID = l.LeagueID AND l.Country = 'Dutch'
                   GROUP BY b.CompanyCode ORDER BY avg(b.PredictionSuccess) DESC";
-	$query3 = "SELECT b.CompanyCode, avg(b.PredictionSuccess) AS Prediction
+	$query3 = "SELECT avg(b.PredictionSuccess) AS Prediction
                   FROM Project.Bets AS b, Project.Matches AS m, Project.Leagues AS l
                   WHERE b.MatchID = m.MatchID AND m.LeagueID = l.LeagueID AND l.Country = 'English'
                   GROUP BY b.CompanyCode ORDER BY avg(b.PredictionSuccess) DESC";
-	$query4 = "SELECT b.CompanyCode, avg(b.PredictionSuccess) AS Prediction
+	$query4 = "SELECT avg(b.PredictionSuccess) AS Prediction
                   FROM Project.Bets AS b, Project.Matches AS m, Project.Leagues AS l
                   WHERE b.MatchID = m.MatchID AND m.LeagueID = l.LeagueID AND l.Country = 'French'
                   GROUP BY b.CompanyCode ORDER BY avg(b.PredictionSuccess) DESC";
-	$query5 = "SELECT b.CompanyCode, avg(b.PredictionSuccess) AS Prediction
+	$query5 = "SELECT avg(b.PredictionSuccess) AS Prediction
                   FROM Project.Bets AS b, Project.Matches AS m, Project.Leagues AS l
                   WHERE b.MatchID = m.MatchID AND m.LeagueID = l.LeagueID AND l.Country = 'German'
                   GROUP BY b.CompanyCode ORDER BY avg(b.PredictionSuccess) DESC";
-	$query6 = "SELECT b.CompanyCode, avg(b.PredictionSuccess) AS Prediction
+	$query6 = "SELECT avg(b.PredictionSuccess) AS Prediction
                   FROM Project.Bets AS b, Project.Matches AS m, Project.Leagues AS l
                   WHERE b.MatchID = m.MatchID AND m.LeagueID = l.LeagueID AND l.Country = 'Greek'
                   GROUP BY b.CompanyCode ORDER BY avg(b.PredictionSuccess) DESC";
-	$query7 = "SELECT b.CompanyCode, avg(b.PredictionSuccess) AS Prediction
+	$query7 = "SELECT avg(b.PredictionSuccess) AS Prediction
                   FROM Project.Bets AS b, Project.Matches AS m, Project.Leagues AS l
                   WHERE b.MatchID = m.MatchID AND m.LeagueID = l.LeagueID AND l.Country = 'Italian'
                   GROUP BY b.CompanyCode ORDER BY avg(b.PredictionSuccess) DESC";
-	$query8 = "SELECT b.CompanyCode, avg(b.PredictionSuccess) AS Prediction
+	$query8 = "SELECT avg(b.PredictionSuccess) AS Prediction
                   FROM Project.Bets AS b, Project.Matches AS m, Project.Leagues AS l
                   WHERE b.MatchID = m.MatchID AND m.LeagueID = l.LeagueID AND l.Country = 'Portuguese'
                   GROUP BY b.CompanyCode ORDER BY avg(b.PredictionSuccess) DESC";
-	$query9 = "SELECT b.CompanyCode, avg(b.PredictionSuccess) AS Prediction
+	$query9 = "SELECT avg(b.PredictionSuccess) AS Prediction
                   FROM Project.Bets AS b, Project.Matches AS m, Project.Leagues AS l
                   WHERE b.MatchID = m.MatchID AND m.LeagueID = l.LeagueID AND l.Country = 'Scottish'
                   GROUP BY b.CompanyCode ORDER BY avg(b.PredictionSuccess) DESC";
-	$query10 = "SELECT b.CompanyCode, avg(b.PredictionSuccess) AS Prediction
+	$query10 = "SELECT avg(b.PredictionSuccess) AS Prediction
                   FROM Project.Bets AS b, Project.Matches AS m, Project.Leagues AS l
                   WHERE b.MatchID = m.MatchID AND m.LeagueID = l.LeagueID AND l.Country = 'Spanish'
                   GROUP BY b.CompanyCode ORDER BY avg(b.PredictionSuccess) DESC";
-	$query11 = "SELECT b.CompanyCode, avg(b.PredictionSuccess) AS Prediction
+	$query11 = "SELECT  avg(b.PredictionSuccess) AS Prediction
                   FROM Project.Bets AS b, Project.Matches AS m, Project.Leagues AS l
                   WHERE b.MatchID = m.MatchID AND m.LeagueID = l.LeagueID AND l.Country = 'Turkish'
                   GROUP BY b.CompanyCode ORDER BY avg(b.PredictionSuccess) DESC";
 
 
-        $title = "Prediction Success of the Betting Companies";
+        $title = "Prediction Success of the Betting Companies per Country";
 	query_and_print_group_graph($query,$query2,$query3,$query4,$query5,$query6,$query7,$query8,$query9,$query10,$query11,$title,"Prediction Success")
 ?>
 
