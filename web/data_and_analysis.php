@@ -52,7 +52,7 @@
                   from (SELECT avg(ms.FullTimeGoals) AS FullTimeGoals FROM Project.MatchStat AS ms WHERE ms.HomeAway = 'H') AS temp
                   union all
                   select 'LeaguePoints' descrip, LeaguePoints value
-                  from (avg(ms.LeaguePoints) AS LeaguePoints FROM Project.MatchStat AS ms WHERE ms.HomeAway = 'H') AS temp
+                  from (SELECT avg(ms.LeaguePoints) AS LeaguePoints FROM Project.MatchStat AS ms WHERE ms.HomeAway = 'H') AS temp
                   union all
                   select 'HalfTimeGoals' descrip, HalfTimeGoals value
                   from (SELECT avg(ms.HalfTimeGoals) AS HalfTimeGoals FROM Project.MatchStat AS ms WHERE ms.HomeAway = 'H') AS temp
@@ -76,7 +76,7 @@
                   from (SELECT avg(ms.FullTimeGoals) AS FullTimeGoals FROM Project.MatchStat AS ms WHERE ms.HomeAway = 'A') AS temp
                   union all
                   select 'LeaguePoints' descrip, LeaguePoints value
-                  from (avg(ms.LeaguePoints) AS LeaguePoints FROM Project.MatchStat AS ms WHERE ms.HomeAway = 'A') AS temp
+                  from (SELECT avg(ms.LeaguePoints) AS LeaguePoints FROM Project.MatchStat AS ms WHERE ms.HomeAway = 'A') AS temp
                   union all
                   select 'HalfTimeGoals' descrip, HalfTimeGoals value
                   from (SELECT avg(ms.HalfTimeGoals) AS HalfTimeGoals FROM Project.MatchStat AS ms WHERE ms.HomeAway = 'A') AS temp
