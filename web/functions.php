@@ -180,15 +180,15 @@ MY_MARKER;
     $str = $str . PHP_EOL . "function " . $id . 'Data() {
  return  [ 
     {
-      key: "Home"'; 
-    $str = $str . '"' . $title . '", values: [';
+      "key": "Home"'; 
+    $str = $str . ', values: [';
 
     while ($row = mysql_fetch_array($result)) {
         $str = $str . '{ "label":"' . $row[0] . '","value":' . $row[1] . '},' . PHP_EOL;
     }
     $str = $str . '] }, {
-    key: "Away"';
-    $str = $str . '"' . $title . '", values: [';
+    "key": "Away"';
+    $str = $str . ', values: [';
 
     while ($row = mysql_fetch_array($result2)) {
         $str = $str . '{ "label":"' . $row[0] . '","value":' . $row[1] . '},' . PHP_EOL;
