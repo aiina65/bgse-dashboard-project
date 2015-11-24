@@ -109,7 +109,7 @@
               FROM Project.Bets AS b 
               GROUP BY b.CompanyCode ORDER BY avg(b.PredictionSuccess) DESC";
         $title = "Prediction Success of the Betting Companies";
-	query_and_print_graph($query,$title,"Prediction Success");
+	query_and_print_circular_graph($query,$title,"Prediction Success");
 ?>
 
 	<p>Blablabla.</p>
@@ -121,7 +121,7 @@
                   WHERE b.MatchID = m.MatchID AND m.LeagueID = l.LeagueID
                   GROUP BY l.Country ORDER BY avg(b.PredictionSuccess) DESC";
         $title = "Prediction Success of the Betting Companies per Country";
-	query_and_print_graph($query,$title,"Prediction Success");
+	query_and_print_circular_graph($query,$title,"Prediction Success");
 ?>
 
 	<p>Blablabla.</p>

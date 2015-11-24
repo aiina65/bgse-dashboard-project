@@ -130,6 +130,67 @@ MY_MARKER;
 
 }
 
+function query_and_print_circular_graph($query,$title,$ylabel) {
+    $id = "graph" . $GLOBALS['graphid'];
+    $GLOBALS['graphid'] = $GLOBALS['graphid'] + 1;
+    
+    echo "<h2>" . $title . "</h2>";
+    echo PHP_EOL,'<div id="'. $id . '"><svg style="height:300px"></svg></div>',PHP_EOL;
+
+    // Perform Query
+    $result = mysql_query($query);
+
+    // Check result
+    // This shows the actual query sent to MySQL, and the error. Useful for debugging.
+    if (!$result) {
+        $message  = 'Invalid query: ' . mysql_error() . "\n";
+        $message .= 'Whole query: ' . $query;
+        die($message);
+    }
+
+    $str = "<script type='text/javascript'>
+        function " . $id . "Chart() {";
+    $str = $str . <<<MY_MARKER
+    nv.addGraph(function() {
+        var chart = nv.addGraph(function() {
+  var chart = nv.models.pieChart()
+      .x(function(d) { return d.label })
+      .y(function(d) { return d.value })
+      .showLabels(true)     //Display pie labels
+      .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
+      .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
+      ;
+
+  
+MY_MARKER;
+
+    $str = $str . PHP_EOL . "d3.select('#" . $id . " svg')
+          .datum(" . $id . "Data())
+          .transition().duration(350)
+          .call(chart);";
+    $str = $str . <<<MY_MARKER
+      nv.utils.windowResize(chart.update);
+
+      return chart;
+    });
+}    
+MY_MARKER;
+    $str = $str . PHP_EOL . $id . "Chart();" . PHP_EOL;
+    $str = $str . PHP_EOL . "mycharts.push(". $id . "Chart)" . PHP_EOL;
+    $str = $str . PHP_EOL . "function " . $id . "Data() {
+ return  [ 
+    {
+      key:"; 
+    $str = $str . '"' . $title . '", values: [';
+
+    while ($row = mysql_fetch_array($result)) {
+        $str = $str . '{ "label":"' . $row[0] . '","value":' . $row[1] . '},' . PHP_EOL;
+    }    
+    $str = $str . '] } ] }</script>';
+    echo $str;
+
+}
+
 
 
 function query_and_print_multiple_graph($query,$query2,$title,$ylabel) {
@@ -202,108 +263,6 @@ MY_MARKER;
     $str = $str . '] } ] }</script>';
     echo $str;
 }
-
-
-function query_and_print_group_graph($query,$query2,$query3,$query4,$query5,$query6,$query7,$query8,$query9,$query10,$query11,$title,$ylabel) {
-    $id = "graph" . $GLOBALS['graphid'];
-    $GLOBALS['graphid'] = $GLOBALS['graphid'] + 1;
-    
-    echo "<h2>" . $title . "</h2>";
-    echo PHP_EOL,'<div id="'. $id . '"><svg style="height:300px"></svg></div>',PHP_EOL;
-
-    // Perform Query
-    $result = mysql_query($query);
-    $result2 = mysql_query($query2);
-    $result3 = mysql_query($query3);
-    $result4 = mysql_query($query4);
-    $result5 = mysql_query($query5);
-    $result6 = mysql_query($query6);
-    $result7 = mysql_query($query7);
-    $result8 = mysql_query($query8);
-    $result9 = mysql_query($query9);
-    $result10 = mysql_query($query10);
-    $result11 = mysql_query($query11);
-
-    // Check result
-    // This shows the actual query sent to MySQL, and the error. Useful for debugging.
-    if (!$result) {
-        $message  = 'Invalid query: ' . mysql_error() . "\n";
-        $message .= 'Whole query: ' . $query;
-        die($message);
-    }
-
-    $str = "<script type='text/javascript'>
-        function " . $id . "Chart() {";
-    $str = $str . <<<MY_MARKER
-  nv.addGraph(function() {
-    var chart = nv.models.multiBarChart()
-      .transitionDuration(350)
-      .reduceXTicks(true)   //If 'false', every single x-axis tick label will be rendered.
-      .rotateLabels(0)      //Angle to rotate x-axis labels.
-      .showControls(true)   //Allow user to switch between 'Grouped' and 'Stacked' mode.
-      .groupSpacing(0.1)    //Distance between each group of bars.
-    ;
-
-    chart.xAxis
-        .tickFormat(d3.format(',f'));
-    chart.yAxis
-        .tickFormat(d3.format(',.1f'));
- 
-MY_MARKER;
-
-    $str = $str . PHP_EOL . "d3.select('#" . $id . " svg')
-          .datum(" . $id . "Data())
-          .call(chart);";
-    $str = $str . <<<MY_MARKER
-      nv.utils.windowResize(chart.update);
-
-      return chart;
-    });
-}    
-MY_MARKER;
-    $str = $str . PHP_EOL . $id . "Chart();" . PHP_EOL;
-    $str = $str . PHP_EOL . "mycharts.push(". $id . "Chart)" . PHP_EOL;
-    $str = $str . PHP_EOL . "function " . $id . 'Data() {
- return  [ 
-    {
-      "key": "Belgium"'; 
-    $str = $str . ', values: ' . $result;
-
-    $str = $str . ' }, {
-    "key": "Holland" ';
-    $str = $str . ', values: ' . $result2;
-
-    $str = $str . ' }, {
-    "key": "England" ';
-    $str = $str . ', values: ' . $result3;
-    $str = $str . ' }, {
-    "key": "France" ';
-    $str = $str . ', values: ' . $result4;
-    $str = $str . ' }, {
-    "key": "Germany" ';
-    $str = $str . ', values: ' . $result5;
-    $str = $str . ' }, {
-    "key": "Greece" ';
-    $str = $str . ', values: ' . $result6;
-    $str = $str . ' }, {
-    "key": "Italy" ';
-    $str = $str . ', values: ' . $result7;
-    $str = $str . ' }, {
-    "key": "Portugal" ';
-    $str = $str . ', values: ' . $result8;
-    $str = $str . ' }, {
-    "key": "Scotland" ';
-    $str = $str . ', values: ' . $result9;
-    $str = $str . ' }, {
-    "key": "Spain" ';
-    $str = $str . ', values: ' . $result10;
-    $str = $str . ' }, {
-    "key": "Turkey" ';
-    $str = $str . ', values: ' . $result11;
-    $str = $str . '} ] }</script>';
-    echo $str;
-}
-
 
 
 
