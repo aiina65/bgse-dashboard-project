@@ -185,14 +185,14 @@ MY_MARKER;
     $str = $str . PHP_EOL . "function " . $id . 'Data() {
  return  [ 
     {
-      "key": "Home", color: "#ddce25"'; 
+      "key": "Home"'; 
     $str = $str . ', values: [';
 
     while ($row = mysql_fetch_array($result)) {
         $str = $str . '{ "label":"' . $row[0] . '","value":' . $row[1] . '},' . PHP_EOL;
     }
     $str = $str . '] }, {
-    "key": "Away", color: "#1cb5b5" ';
+    "key": "Away"';
     $str = $str . ', values: [';
 
     while ($row = mysql_fetch_array($result2)) {
