@@ -163,6 +163,11 @@ function query_and_print_multiple_graph($query,$query2,$title,$ylabel) {
         .tooltips(true)             //Show tooltips on hover.
         .transitionDuration(350)
         .showControls(true);
+
+    chart.yAxis     //Chart y-axis settings
+      .axisLabel('Y')
+      .tickFormat(d3.format('.0f'));
+    
 MY_MARKER;
     $str = $str . PHP_EOL . 'chart.yAxis.axisLabel("' . $ylabel . '").axisLabelDistance(30)';
     $str = $str . PHP_EOL . "d3.select('#" . $id . " svg')
