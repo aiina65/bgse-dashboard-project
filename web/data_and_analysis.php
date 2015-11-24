@@ -105,7 +105,7 @@
 <?php
 	// Page body. Write here your queries
 	
-	$query = "SELECT b.CompanyCode, avg(b.PredictionSuccess) AS Prediction
+	$query = "SELECT b.CompanyCode AS CompanyCode, avg(b.PredictionSuccess) AS Prediction
               FROM Project.Bets AS b 
               GROUP BY b.CompanyCode ORDER BY avg(b.PredictionSuccess) DESC";
         $title = "Prediction Success of the Betting Companies";
@@ -116,7 +116,7 @@
 <?php
 	// Page body. Write here your queries
 	
-	$query = "SELECT l.Country, avg(b.PredictionSuccess) AS Prediction
+	$query = "SELECT l.Country AS Country, avg(b.PredictionSuccess) AS Prediction
                   FROM Project.Bets AS b, Project.Matches AS m, Project.Leagues AS l
                   WHERE b.MatchID = m.MatchID AND m.LeagueID = l.LeagueID
                   GROUP BY l.Country ORDER BY avg(b.PredictionSuccess) DESC";

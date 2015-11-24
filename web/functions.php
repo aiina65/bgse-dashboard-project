@@ -224,7 +224,7 @@ function query_and_print_multiple_graph($query,$query2,$title,$ylabel) {
       .tickFormat(d3.format('.0f'));
     
 MY_MARKER;
-    $str = $str . PHP_EOL . 'chart.yAxis.axisLabel("' . $ylabel . '").axisLabelDistance(30)';
+    $str = $str . PHP_EOL . 'chart.yAxis.axisLabel(" Things ").axisLabelDistance(30)';
     $str = $str . PHP_EOL . "d3.select('#" . $id . " svg')
           .datum(" . $id . "Data())
           .call(chart);";
