@@ -165,7 +165,7 @@ MY_MARKER;
           .transition().duration(350)
           .call(chart);";
     $str = $str . <<<MY_MARKER
-
+nv.utils.windowResize(chart.update);
       return chart;
     });
 }    
