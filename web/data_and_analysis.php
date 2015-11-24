@@ -28,10 +28,6 @@
     query_and_print_graph($query,$title,"Average League Points");
 ?>
 
-
-
-
-
 	
 	<p>The chart below shows the results of a similar analysis, this time the 10 worst teams of the history.</p>
 	
@@ -46,7 +42,28 @@
 	query_and_print_graph($query,$title,"Average League Points");
 ?>
 
+
 	<p>Blablabla.</p>
+	
+<?php
+	// Page body. Write here your queries
+	
+	$query = "SELECT t.TeamName, avg(m.LeaguePoints)
+                  FROM Project.MatchStat AS m, Project.Teams AS t 
+                  WHERE m.TeamID = t.TeamID 
+                  GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) ASC LIMIT 10";
+        $query2 = "SELECT t.TeamName, avg(m.LeaguePoints)
+                  FROM Project.MatchStat AS m, Project.Teams AS t 
+                  WHERE m.TeamID = t.TeamID 
+                  GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) ASC LIMIT 10";
+        $title = "Top Worst Teams";
+       query_and_print_multiple_graph($query,$query2,$title,"Average League Points");
+?>
+
+
+	<p>Blablabla.</p>
+
+
 
 <?php
 	// Page body. Write here your queries
