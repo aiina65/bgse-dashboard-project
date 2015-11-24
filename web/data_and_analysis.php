@@ -61,7 +61,7 @@
                   from (SELECT avg(ms.Shots) AS Shots FROM Project.MatchStat AS ms WHERE ms.HomeAway = 'H') AS temp
                   union all
                   select 'ShotsOnTarget' descrip, ShotsOnTarget value
-                  from (SELECT avg(ms.ShotsOnTarget) AS ShotsOnTarget FROM Project.MatchStat AS msWHERE ms.HomeAway = 'H') AS temp
+                  from (SELECT avg(ms.ShotsOnTarget) AS ShotsOnTarget FROM Project.MatchStat AS ms WHERE ms.HomeAway = 'H') AS temp
                   union all
                   select 'Fouls' descrip, Fouls value
                   from (SELECT avg(ms.FoulsCommitted) AS Fouls FROM Project.MatchStat AS ms WHERE ms.HomeAway = 'H') AS temp
@@ -85,7 +85,7 @@
                   from (SELECT avg(ms.Shots) AS Shots FROM Project.MatchStat AS ms WHERE ms.HomeAway = 'A') AS temp
                   union all
                   select 'ShotsOnTarget' descrip, ShotsOnTarget value
-                  from (SELECT avg(ms.ShotsOnTarget) AS ShotsOnTarget FROM Project.MatchStat AS msWHERE ms.HomeAway = 'A') AS temp
+                  from (SELECT avg(ms.ShotsOnTarget) AS ShotsOnTarget FROM Project.MatchStat AS ms WHERE ms.HomeAway = 'A') AS temp
                   union all
                   select 'Fouls' descrip, Fouls value
                   from (SELECT avg(ms.FoulsCommitted) AS Fouls FROM Project.MatchStat AS ms WHERE ms.HomeAway = 'A') AS temp
