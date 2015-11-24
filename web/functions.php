@@ -153,19 +153,18 @@ function query_and_print_circular_graph($query,$title) {
     $str = $str . <<<MY_MARKER
     nv.addGraph(function() {
       var chart = nv.models.pieChart()
-      .x(function(d) { return d.label })
-      .y(function(d) { return d.value })
-      .showLabels(true)     //Display pie labels
-      .labelType("percent");
+       .x(function(d) { return d.label })
+       .y(function(d) { return d.value })
+       .showLabels(true)     //Display pie labels
+;
   
 MY_MARKER;
-
     $str = $str . PHP_EOL . "d3.select('#" . $id . " svg')
           .datum(" . $id . "Data())
           .transition().duration(350)
           .call(chart);";
     $str = $str . <<<MY_MARKER
-nv.utils.windowResize(chart.update);
+
       return chart;
     });
 }    
