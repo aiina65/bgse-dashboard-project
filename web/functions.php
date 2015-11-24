@@ -163,7 +163,7 @@ function query_and_print_multiple_graph($query,$query2,$title,$ylabel) {
         .tooltips(true)             //Show tooltips on hover.
         .transitionDuration(350)
         .showControls(true);
-MY_MARKER2;
+MY_MARKER;
     $str = $str . PHP_EOL . 'chart.yAxis.axisLabel("' . $ylabel . '").axisLabelDistance(30)';
     $str = $str . PHP_EOL . "d3.select('#" . $id . " svg')
           .datum(" . $id . "Data())
@@ -174,28 +174,18 @@ MY_MARKER2;
       return chart;
     });
 }    
-MY_MARKER2;
+MY_MARKER;
     $str = $str . PHP_EOL . $id . "Chart();" . PHP_EOL;
     $str = $str . PHP_EOL . "mycharts.push(". $id . "Chart)" . PHP_EOL;
-    $str = $str . PHP_EOL . "function " . $id . 'Data() {
+    $str = $str . PHP_EOL . "function " . $id . "Data() {
  return  [ 
     {
-      key: "Home"'; 
+      key:"; 
     $str = $str . '"' . $title . '", values: [';
 
     while ($row = mysql_fetch_array($result)) {
         $str = $str . '{ "label":"' . $row[0] . '","value":' . $row[1] . '},' . PHP_EOL;
     }    
-
-    $str = $str . '] },
-    { 
-      key: "Away" ';
-
-     $str = $str . '"' . $title . '", values: [';
-    while ($row = mysql_fetch_array($result2)) {
-        $str = $str . '{ "label":"' . $row[0] . '","value":' . $row[1] . '},' . PHP_EOL;
-    }    
-
     $str = $str . '] } ] }</script>';
     echo $str;
 
