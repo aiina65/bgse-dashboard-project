@@ -48,16 +48,67 @@
 <?php
 	// Page body. Write here your queries
 	
-	$query = "SELECT t.TeamName, avg(m.LeaguePoints)
-                  FROM Project.MatchStat AS m, Project.Teams AS t 
-                  WHERE m.TeamID = t.TeamID 
-                  GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) ASC LIMIT 10";
-        $query2 = "SELECT t.TeamName, avg(m.LeaguePoints)
-                  FROM Project.MatchStat AS m, Project.Teams AS t 
-                  WHERE m.TeamID = t.TeamID 
-                  GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) ASC LIMIT 10";
+	$query = "DROP VIEW IF EXISTS temp;
+                  CREATE VIEW temp AS 
+                  SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
+                  FROM Project.MatchStat AS ms
+                  WHERE ms.HomeAway = 'H';
+
+                  SELECT FullTimeGoals value, 'FullTimeGoals' descrip
+                  from temp
+                  union all
+                  select LeaguePoints value, 'LeaguePoints' descrip
+                  from temp
+                  union all
+                  select HalfTimeGoals value, 'HalfTimeGoals' descrip
+                  from temp
+                  union all
+                  select Shots value, 'Shots' descrip
+                  from temp
+                  union all
+                  select ShotsOnTarget value, 'ShotsOnTarget' descrip
+                  from temp
+                  union all
+                  select Fouls value, 'Fouls' descrip
+                  from temp
+                  union all
+                  select YellowCards value, 'YellowCards' descrip
+                  from temp
+                  union all
+                  select RedCards value, 'RedCards' descrip
+                  from temp";
+
+        $query2 = "DROP VIEW IF EXISTS temp2;
+                  CREATE VIEW temp2 AS 
+                  SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
+                  FROM Project.MatchStat AS ms
+                  WHERE ms.HomeAway = 'A';
+
+                  SELECT FullTimeGoals value, 'FullTimeGoals' descrip
+                  from temp2
+                  union all
+                  select LeaguePoints value, 'LeaguePoints' descrip
+                  from temp2
+                  union all
+                  select HalfTimeGoals value, 'HalfTimeGoals' descrip
+                  from temp2
+                  union all
+                  select Shots value, 'Shots' descrip
+                  from temp2
+                  union all
+                  select ShotsOnTarget value, 'ShotsOnTarget' descrip
+                  from temp2
+                  union all
+                  select Fouls value, 'Fouls' descrip
+                  from temp2
+                  union all
+                  select YellowCards value, 'YellowCards' descrip
+                  from temp2
+                  union all
+                  select RedCards value, 'RedCards' descrip
+                  from temp2";
         $title = "Top Teams";
-       query_and_print_multiple_graph($query,$query2,$title,"Average League Points");
+       query_and_print_multiple_graph($query,$query2,$title,"Average Number of Units");
 ?>
 
 
