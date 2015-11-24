@@ -246,10 +246,11 @@ function query_and_print_group_graph($query,$query2,$query3,$query4,$query5,$que
 
     chart.xAxis
         .tickFormat(d3.format(',f'));
-
+    chart.yAxis
+        .tickFormat(d3.format(',.1f'));
  
 MY_MARKER;
-    $str = $str . PHP_EOL . 'chart.yAxis.axisLabel("' . $ylabel . '").axisLabelDistance(30)';
+
     $str = $str . PHP_EOL . "d3.select('#" . $id . " svg')
           .datum(" . $id . "Data())
           .call(chart);";
