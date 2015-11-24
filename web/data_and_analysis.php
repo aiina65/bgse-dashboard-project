@@ -27,12 +27,6 @@
     $title = "Top Best Teams";
     query_and_print_graph($query,$title,"Average League Points");
 ?>
-
-
-
-
-
-	
 	<p>The chart below shows the results of a similar analysis, this time the 10 worst teams of the history.</p>
 	
 <?php
@@ -74,15 +68,15 @@ WHERE ms.HomeAway = 'A'";
         $title = "Prediction Success of the Betting Companies";
 
 //query_and_print_multiple_graph($query, $query2 ,$title," ")
-// query_and_print_table($query,$title,"Average Statistics of teams playing at home");
+query_and_print_table($query,$title,"Average Statistics of teams playing at home");
 ?>
 
 <?php
 	// Page body. Write here your queries
 	
-//	$query = "SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards FROM Project.MatchStat AS ms WHERE ms.HomeAway = 'A'";
-//    $title = "Prediction Success of the Betting Companies";
-//	query_and_print_table($query,$title,"Average Statistics of teams playing away");
+	$query = "SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards FROM Project.MatchStat AS ms WHERE ms.HomeAway = 'A'";
+    $title = "Prediction Success of the Betting Companies";
+	query_and_print_table($query,$title,"Average Statistics of teams playing away");
 ?>
 
 
