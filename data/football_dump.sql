@@ -69,8 +69,8 @@ FROM GeneralTable AS g
 	LEFT JOIN Leagues AS l
 		ON l.Country = g.Country
 ORDER BY g.MatchID desc;
-    SELECT MatchID , Date FROM GeneralTable;
-    SELECT MatchID , MatchDate FROM Matches;
+/*    SELECT MatchID , Date FROM GeneralTable;
+    SELECT MatchID , MatchDate FROM Matches;*/
 
 /* Load the data of each betting company for each match */
 
@@ -148,4 +148,3 @@ CALL create_countview();
 CALL create_winners;
 
 drop table if exists GeneralTable ;
-
