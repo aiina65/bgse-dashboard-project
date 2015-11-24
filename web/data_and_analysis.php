@@ -160,7 +160,7 @@
                   FROM Project.Bets AS b, Project.Matches AS m, Project.Leagues AS l
                   WHERE b.MatchID = m.MatchID AND m.LeagueID = l.LeagueID AND l.Country = 'Spanish'
                   GROUP BY b.CompanyCode ORDER BY avg(b.PredictionSuccess) DESC";
-	$query11 = "SELECT  avg(b.PredictionSuccess) AS Prediction
+	$query11 = "SELECT avg(b.PredictionSuccess) AS Prediction
                   FROM Project.Bets AS b, Project.Matches AS m, Project.Leagues AS l
                   WHERE b.MatchID = m.MatchID AND m.LeagueID = l.LeagueID AND l.Country = 'Turkish'
                   GROUP BY b.CompanyCode ORDER BY avg(b.PredictionSuccess) DESC";
