@@ -54,28 +54,28 @@
                   FROM Project.MatchStat AS ms
                   WHERE ms.HomeAway = 'H';
 
-                  SELECT FullTimeGoals value, 'FullTimeGoals' descrip
+                  SELECT 'FullTimeGoals' descrip, FullTimeGoals value 
                   from temp
                   union all
-                  select LeaguePoints value, 'LeaguePoints' descrip
+                  select 'LeaguePoints' descrip, LeaguePoints value
                   from temp
                   union all
-                  select HalfTimeGoals value, 'HalfTimeGoals' descrip
+                  select 'HalfTimeGoals' descrip, HalfTimeGoals value 
                   from temp
                   union all
-                  select Shots value, 'Shots' descrip
+                  select 'Shots' descrip, Shots value 
                   from temp
                   union all
-                  select ShotsOnTarget value, 'ShotsOnTarget' descrip
+                  select 'ShotsOnTarget' descrip, ShotsOnTarget value
                   from temp
                   union all
-                  select Fouls value, 'Fouls' descrip
+                  select 'Fouls' descrip, Fouls value 
                   from temp
                   union all
-                  select YellowCards value, 'YellowCards' descrip
+                  select 'YellowCards' descrip, YellowCards value
                   from temp
                   union all
-                  select RedCards value, 'RedCards' descrip
+                  select 'RedCards' descrip, RedCards value
                   from temp";
 
         $query2 = "DROP VIEW IF EXISTS temp2;
@@ -84,28 +84,28 @@
                   FROM Project.MatchStat AS ms
                   WHERE ms.HomeAway = 'A';
 
-                  SELECT FullTimeGoals value, 'FullTimeGoals' descrip
+                  SELECT 'FullTimeGoals' descrip, FullTimeGoals value
                   from temp2
                   union all
-                  select LeaguePoints value, 'LeaguePoints' descrip
+                  select 'LeaguePoints' descrip, LeaguePoints value
                   from temp2
                   union all
-                  select HalfTimeGoals value, 'HalfTimeGoals' descrip
+                  select 'HalfTimeGoals' descrip, HalfTimeGoals value
                   from temp2
                   union all
-                  select Shots value, 'Shots' descrip
+                  select 'Shots' descrip, Shots value 
                   from temp2
                   union all
-                  select ShotsOnTarget value, 'ShotsOnTarget' descrip
+                  select 'ShotsOnTarget' descrip, ShotsOnTarget value
                   from temp2
                   union all
-                  select Fouls value, 'Fouls' descrip
+                  select 'Fouls' descrip, Fouls value
                   from temp2
                   union all
-                  select YellowCards value, 'YellowCards' descrip
+                  select 'YellowCards' descrip, YellowCards value 
                   from temp2
                   union all
-                  select RedCards value, 'RedCards' descrip
+                  select 'RedCards' descrip, RedCards value
                   from temp2";
         $title = "Top Teams";
        query_and_print_multiple_graph($query,$query2,$title,"Average Number of Units");
