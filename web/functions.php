@@ -152,15 +152,18 @@ function query_and_print_circular_graph($query,$title) {
         function " . $id . "Chart() {";
     $str = $str . <<<MY_MARKER
     nv.addGraph(function() {
-      .x(function(d) { return d.label })
-      .y(function(d) { return d.value })
-      .showLabels(true);
-
+      var chart = nv.models.pieChart()
+       .x(function(d) { return d.label })
+       .y(function(d) { return d.value })
+       .showLabels(true) ;
+  
 MY_MARKER;
     $str = $str . PHP_EOL . "d3.select('#" . $id . " svg')
           .datum(" . $id . "Data())
+          .transition().duration(350)
           .call(chart);";
     $str = $str . <<<MY_MARKER
+
       return chart;
     });
 }    
@@ -169,8 +172,7 @@ MY_MARKER;
     $str = $str . PHP_EOL . "mycharts.push(". $id . "Chart)" . PHP_EOL;
     $str = $str . PHP_EOL . "function " . $id . "Data() {
  return  [ 
-    {
-      key:"; 
+    {"; 
     $str = $str . '"' . $title . '", values: [';
 
     while ($row = mysql_fetch_array($result)) {
