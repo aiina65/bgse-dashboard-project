@@ -161,10 +161,8 @@ function query_and_print_circular_graph($query,$title) {
 MY_MARKER;
     $str = $str . PHP_EOL . "d3.select('#" . $id . " svg')
           .datum(" . $id . "Data())
-          .transition().duration(350)
           .call(chart);";
     $str = $str . <<<MY_MARKER
-       nv.utils.windowResize(chart.update);
       return chart;
     });
 }    
