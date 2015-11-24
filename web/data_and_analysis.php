@@ -127,7 +127,10 @@
                         WHERE ms.HomeAway = 'A') AS temp
                   union all
                   select 'Fouls' descrip, Fouls value
-                  from Project.temp2
+                  from (SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
+                        avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
+                        FROM Project.MatchStat AS ms
+                        WHERE ms.HomeAway = 'A') AS temp
                   union all
                   select 'YellowCards' descrip, YellowCards value 
                   from (SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
@@ -140,6 +143,7 @@
                         avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
                         FROM Project.MatchStat AS ms
                         WHERE ms.HomeAway = 'A') AS temp";
+
         $title = "Top Teams";
        query_and_print_multiple_graph($query,$query2,$title,"Average Number of Units");
 ?>
