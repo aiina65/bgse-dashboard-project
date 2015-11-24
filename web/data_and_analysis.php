@@ -73,7 +73,7 @@ WHERE ms.HomeAway = 'A'";
 
         $title = "Prediction Success of the Betting Companies";
 
-query_and_print_multiple_graph($query, $query2 ,$title," ")
+//query_and_print_multiple_graph($query, $query2 ,$title," ")
 // query_and_print_table($query,$title,"Average Statistics of teams playing at home");
 ?>
 
