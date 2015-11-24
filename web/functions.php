@@ -72,7 +72,7 @@ function query_and_print_table($query,$title) {
     mysql_free_result($result);
 }
 
-
+/*
 function query_and_print_multiple_graph($query, $query2 ,$title,$ylabel) {
     $id = "graph" . $GLOBALS['graphid'];
     $GLOBALS['graphid'] = $GLOBALS['graphid'] + 1;
@@ -142,6 +142,7 @@ MY_MARKER;
 }
 
 
+*/
 
 unction query_and_print_graph($query,$title,$ylabel) {
     $id = "graph" . $GLOBALS['graphid'];
