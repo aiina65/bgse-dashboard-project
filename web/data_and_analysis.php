@@ -167,7 +167,7 @@
 
 
         $title = "Prediction Success of the Betting Companies";
-	query_and_print_group_graph($query,$query2,$query3,$query4,$query5,$query6,$query7,$query8,$query9,$query10,$query11,$title,$ylabel)
+	query_and_print_group_graph($query,$query2,$query3,$query4,$query5,$query6,$query7,$query8,$query9,$query10,$query11,$title,"Prediction Success")
 ?>
 
 	<p>Blablabla.</p>
