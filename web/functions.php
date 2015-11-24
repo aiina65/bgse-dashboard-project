@@ -185,10 +185,17 @@ MY_MARKER;
 
     while ($row = mysql_fetch_array($result)) {
         $str = $str . '{ "label":"' . $row[0] . '","value":' . $row[1] . '},' . PHP_EOL;
-    }    
+    }
+    $str = $str . '] }, {
+    key: "Away"';
+    $str = $str . '"' . $title . '", values: [';
+
+    while ($row = mysql_fetch_array($result2)) {
+        $str = $str . '{ "label":"' . $row[0] . '","value":' . $row[1] . '},' . PHP_EOL;
+    }
+
     $str = $str . '] } ] }</script>';
     echo $str;
-
 }
 
 
