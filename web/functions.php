@@ -156,7 +156,6 @@ function query_and_print_circular_graph($query,$title) {
       .x(function(d) { return d.label })
       .y(function(d) { return d.value })
       .showLabels(true)     //Display pie labels
-      .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
       .labelType("percent");
   
 MY_MARKER;
