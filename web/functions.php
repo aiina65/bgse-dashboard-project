@@ -204,7 +204,7 @@ MY_MARKER;
 }
 
 
-function query_and_print_grouped_graph($query,$query2,$query3,$query4,$query5,$query6,$query7,$query8,$query9,$query10,$query11,$title,$ylabel) {
+function query_and_print_group_graph($query,$query2,$query3,$query4,$query5,$query6,$query7,$query8,$query9,$query10,$query11,$title,$ylabel) {
     $id = "graph" . $GLOBALS['graphid'];
     $GLOBALS['graphid'] = $GLOBALS['graphid'] + 1;
     
@@ -235,20 +235,19 @@ function query_and_print_grouped_graph($query,$query2,$query3,$query4,$query5,$q
     $str = "<script type='text/javascript'>
         function " . $id . "Chart() {";
     $str = $str . <<<MY_MARKER
-    nv.addGraph(function() {
-    var chart = nv.models.multiBarChart()
-      .transitionDuration(350)
-      .reduceXTicks(true)   //If 'false', every single x-axis tick label will be rendered.
-      .rotateLabels(0)      //Angle to rotate x-axis labels.
-      .showControls(true)   //Allow user to switch between 'Grouped' and 'Stacked' mode.
-      .groupSpacing(0.1)    //Distance between each group of bars.
-    ;
+   nv.addGraph(function() {
+    var chart = nv.models.multiBarHorizontalChart()
+        .x(function(d) { return d.label })
+        .y(function(d) { return d.value })
+        .margin({top: 30, right: 20, bottom: 50, left: 175})
+        .showValues(true)           //Show bar value next to each bar.
+        .tooltips(true)             //Show tooltips on hover.
+        .transitionDuration(350)
+        .showControls(true);
 
-    chart.xAxis
-        .tickFormat(d3.format(',f'));
-
-    chart.yAxis
-        .tickFormat(d3.format(',.1f'));
+    chart.yAxis     //Chart y-axis settings
+      .axisLabel('Y')
+      .tickFormat(d3.format('.0f'));
     
 MY_MARKER;
     $str = $str . PHP_EOL . 'chart.yAxis.axisLabel("' . $ylabel . '").axisLabelDistance(30)';
@@ -271,84 +270,83 @@ MY_MARKER;
     $str = $str . ', values: [';
 
     while ($row = mysql_fetch_array($result)) {
-        $str = $str . '{"value":' . $row[1] . '},' . PHP_EOL;
+        $str = $str . '{ "label":"' . $row[0] . '","value":' . $row[1] . '},' . PHP_EOL;
     }
     $str = $str . '] }, {
     "key": "Holland" ';
     $str = $str . ', values: [';
 
     while ($row = mysql_fetch_array($result2)) {
-        $str = $str . '{"value":' . $row[1] . '},' . PHP_EOL;
+        $str = $str . '{ "label":"' . $row[0] . '","value":' . $row[1] . '},' . PHP_EOL;
     }
     $str = $str . '] }, {
     "key": "England" ';
     $str = $str . ', values: [';
 
     while ($row = mysql_fetch_array($result3)) {
-        $str = $str . '{"value":' . $row[1] . '},' . PHP_EOL;
+        $str = $str . '{ "label":"' . $row[0] . '","value":' . $row[1] . '},' . PHP_EOL;
     }
-
- $str = $str . '] }, {
+    $str = $str . '] }, {
     "key": "France" ';
     $str = $str . ', values: [';
 
     while ($row = mysql_fetch_array($result4)) {
-        $str = $str . '{"value":' . $row[1] . '},' . PHP_EOL;
+        $str = $str . '{ "label":"' . $row[0] . '","value":' . $row[1] . '},' . PHP_EOL;
     }
- $str = $str . '] }, {
+    $str = $str . '] }, {
     "key": "Germany" ';
     $str = $str . ', values: [';
 
     while ($row = mysql_fetch_array($result5)) {
-        $str = $str . '{"value":' . $row[1] . '},' . PHP_EOL;
+        $str = $str . '{ "label":"' . $row[0] . '","value":' . $row[1] . '},' . PHP_EOL;
     }
- $str = $str . '] }, {
+    $str = $str . '] }, {
     "key": "Greece" ';
     $str = $str . ', values: [';
 
     while ($row = mysql_fetch_array($result6)) {
-        $str = $str . '{"value":' . $row[1] . '},' . PHP_EOL;
+        $str = $str . '{ "label":"' . $row[0] . '","value":' . $row[1] . '},' . PHP_EOL;
     }
- $str = $str . '] }, {
+    $str = $str . '] }, {
     "key": "Italy" ';
     $str = $str . ', values: [';
 
     while ($row = mysql_fetch_array($result7)) {
-        $str = $str . '{"value":' . $row[1] . '},' . PHP_EOL;
+        $str = $str . '{ "label":"' . $row[0] . '","value":' . $row[1] . '},' . PHP_EOL;
     }
- $str = $str . '] }, {
+    $str = $str . '] }, {
     "key": "Portugal" ';
     $str = $str . ', values: [';
 
     while ($row = mysql_fetch_array($result8)) {
-        $str = $str . '{"value":' . $row[1] . '},' . PHP_EOL;
+        $str = $str . '{ "label":"' . $row[0] . '","value":' . $row[1] . '},' . PHP_EOL;
     }
- $str = $str . '] }, {
+    $str = $str . '] }, {
     "key": "Scotland" ';
     $str = $str . ', values: [';
 
     while ($row = mysql_fetch_array($result9)) {
-        $str = $str . '{ "value":' . $row[1] . '},' . PHP_EOL;
+        $str = $str . '{ "label":"' . $row[0] . '","value":' . $row[1] . '},' . PHP_EOL;
     }
- $str = $str . '] }, {
+    $str = $str . '] }, {
     "key": "Spain" ';
     $str = $str . ', values: [';
 
     while ($row = mysql_fetch_array($result10)) {
-        $str = $str . '{"value":' . $row[1] . '},' . PHP_EOL;
+        $str = $str . '{ "label":"' . $row[0] . '","value":' . $row[1] . '},' . PHP_EOL;
     }
- $str = $str . '] }, {
-    "key": "Trukey" ';
+    $str = $str . '] }, {
+    "key": "Turkey" ';
     $str = $str . ', values: [';
+
     while ($row = mysql_fetch_array($result11)) {
-        $str = $str . '{ "value":' . $row[1] . '},' . PHP_EOL;
+        $str = $str . '{ "label":"' . $row[0] . '","value":' . $row[1] . '},' . PHP_EOL;
     }
-
-
-
-$str = $str . '] } ] }</script>';
+    $str = $str . '] } ] }</script>';
     echo $str;
 }
+
+
 
 
 
