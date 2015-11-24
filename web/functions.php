@@ -152,12 +152,10 @@ function query_and_print_circular_graph($query,$title) {
         function " . $id . "Chart() {";
     $str = $str . <<<MY_MARKER
     nv.addGraph(function() {
-      var chart = nv.models.pieChart()
-       .x(function(d) { return d.label })
-       .y(function(d) { return d.value })
-       .showLabels(true)     //Display pie labels
-;
-  
+      .x(function(d) { return d.label })
+      .y(function(d) { return d.value })
+      .showLabels(true);
+
 MY_MARKER;
     $str = $str . PHP_EOL . "d3.select('#" . $id . " svg')
           .datum(" . $id . "Data())
