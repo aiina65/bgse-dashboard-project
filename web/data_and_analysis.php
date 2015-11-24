@@ -48,103 +48,115 @@
 <?php
 	// Page body. Write here your queries
 	
-	$query = "SELECT 'FullTimeGoals' descrip, FullTimeGoals value 
-                  from (SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
+	$query = "SELECT 'LeaguePoints' descrip, LeaguePoints value 
+                  from (SELECT  avg(m.LeaguePoints) AS LeaguePoints, avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
+                        avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
+                        FROM Project.MatchStat AS ms
+                        WHERE ms.HomeAway = 'H') AS temp
+                  union all
+                  SELECT 'FullTimeGoals' descrip, FullTimeGoals value 
+                  from (SELECT  avg(m.LeaguePoints) AS LeaguePoints, avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
                         avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
                         FROM Project.MatchStat AS ms
                         WHERE ms.HomeAway = 'H') AS temp
                   union all
                   select 'LeaguePoints' descrip, LeaguePoints value
-                  from (SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
+                  from (SELECT avg(m.LeaguePoints) AS LeaguePoints,  avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
                         avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
                         FROM Project.MatchStat AS ms
                         WHERE ms.HomeAway = 'H') AS temp
                   union all
-                  select 'HalfTimeGoals' descrip, HalfTimeGoals value 
+                  select avg(m.LeaguePoints) AS LeaguePoints, 'HalfTimeGoals' descrip, HalfTimeGoals value 
                   from (SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
                         avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
                         FROM Project.MatchStat AS ms
                         WHERE ms.HomeAway = 'H') AS temp
                   union all
                   select 'Shots' descrip, Shots value 
-                  from (SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
+                  from (SELECT avg(m.LeaguePoints) AS LeaguePoints, avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
                         avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
                         FROM Project.MatchStat AS ms
                         WHERE ms.HomeAway = 'H') AS temp
                   union all
                   select 'ShotsOnTarget' descrip, ShotsOnTarget value
-                  from (SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
+                  from (SELECT avg(m.LeaguePoints) AS LeaguePoints, avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
                         avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
                         FROM Project.MatchStat AS ms
                         WHERE ms.HomeAway = 'H') AS temp
                   union all
                   select 'Fouls' descrip, Fouls value 
-                  from (SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
+                  from (SELECT avg(m.LeaguePoints) AS LeaguePoints, avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
                         avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
                         FROM Project.MatchStat AS ms
                         WHERE ms.HomeAway = 'H') AS temp
                   union all
                   select 'YellowCards' descrip, YellowCards value
-                  from (SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
+                  from (SELECT avg(m.LeaguePoints) AS LeaguePoints, avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
                         avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
                         FROM Project.MatchStat AS ms
                         WHERE ms.HomeAway = 'H') AS temp
                   union all
                   select 'RedCards' descrip, RedCards value
-                  from (SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
+                  from (SELECT avg(m.LeaguePoints) AS LeaguePoints, avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
                         avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
                         FROM Project.MatchStat AS ms
                         WHERE ms.HomeAway = 'H') AS temp";
 
-        $query2 = "SELECT 'FullTimeGoals' descrip, FullTimeGoals value
-                  from (SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
+        $query2 = "SELECT 'LeaguePoints' descrip, LeaguePoints value 
+                  from (SELECT  avg(m.LeaguePoints) AS LeaguePoints, avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
+                        avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
+                        FROM Project.MatchStat AS ms
+                        WHERE ms.HomeAway = 'A') AS temp
+                  union all
+                  SELECT 'FullTimeGoals' descrip, FullTimeGoals value
+                  from (SELECT avg(m.LeaguePoints) AS LeaguePoints, avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
                         avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
                         FROM Project.MatchStat AS ms
                         WHERE ms.HomeAway = 'A') AS temp
                   union all
                   select 'LeaguePoints' descrip, LeaguePoints value
-                  from (SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
+                  from (SELECT avg(m.LeaguePoints) AS LeaguePoints, avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
                         avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
                         FROM Project.MatchStat AS ms
                         WHERE ms.HomeAway = 'A') AS temp
                   union all
                   select 'HalfTimeGoals' descrip, HalfTimeGoals value
-                  from (SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
+                  from (SELECT avg(m.LeaguePoints) AS LeaguePoints, avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
                         avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
                         FROM Project.MatchStat AS ms
                         WHERE ms.HomeAway = 'A') AS temp
                   union all
                   select 'Shots' descrip, Shots value 
-                  from (SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
+                  from (SELECT avg(m.LeaguePoints) AS LeaguePoints, avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
                         avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
                         FROM Project.MatchStat AS ms
                         WHERE ms.HomeAway = 'A') AS temp
                   union all
                   select 'ShotsOnTarget' descrip, ShotsOnTarget value
-                  from (SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
+                  from (SELECT avg(m.LeaguePoints) AS LeaguePoints,  avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
                         avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
                         FROM Project.MatchStat AS ms
                         WHERE ms.HomeAway = 'A') AS temp
                   union all
                   select 'Fouls' descrip, Fouls value
-                  from (SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
+                  from (SELECT avg(m.LeaguePoints) AS LeaguePoints, avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
                         avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
                         FROM Project.MatchStat AS ms
                         WHERE ms.HomeAway = 'A') AS temp
                   union all
                   select 'YellowCards' descrip, YellowCards value 
-                  from (SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
+                  from (SELECT avg(m.LeaguePoints) AS LeaguePoints, avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
                         avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
                         FROM Project.MatchStat AS ms
                         WHERE ms.HomeAway = 'A') AS temp
                   union all
                   select 'RedCards' descrip, RedCards value
-                  from (SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
+                  from (SELECT avg(m.LeaguePoints) AS LeaguePoints, avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, 
                         avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
                         FROM Project.MatchStat AS ms
                         WHERE ms.HomeAway = 'A') AS temp";
 
-        $title = "Top Teams";
+        $title = "Match Statistics";
        query_and_print_multiple_graph($query,$query2,$title,"Average Number of Units");
 ?>
 
@@ -164,27 +176,6 @@
 ?>
 
 	<p>Blablabla.</p>
-
-<?php
-	// Page body. Write here your queries
-	
-	$query = "SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
-FROM Project.MatchStat AS ms
-WHERE ms.HomeAway = 'H'";
-
-        $title = "Prediction Success of the Betting Companies";
-        query_and_print_table($query,$title,"Average Statistics of teams playing at home");
-?>
-
-<?php
-	// Page body. Write here your queries
-	
-	$query = "SELECT avg(ms.FullTimeGoals) AS FullTimeGoals, avg(ms.LeaguePoints) AS LeaguePoints, avg(ms.HalfTimeGoals) AS HalfTimeGoals, avg(ms.Shots) AS Shots, avg(ms.ShotsOnTarget) AS ShotsOnTarget , avg(ms.FoulsCommitted) AS Fouls, avg(ms.YellowCards) AS YellowCards, avg(ms.RedCards) AS RedCards
-FROM Project.MatchStat AS ms
-WHERE ms.HomeAway = 'A'";
-        $title = "Prediction Success of the Betting Companies";
-	query_and_print_table($query,$title,"Average Statistics of teams playing away");
-?>
 
 
 <?php
