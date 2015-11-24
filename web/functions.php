@@ -177,10 +177,10 @@ MY_MARKER;
 MY_MARKER;
     $str = $str . PHP_EOL . $id . "Chart();" . PHP_EOL;
     $str = $str . PHP_EOL . "mycharts.push(". $id . "Chart)" . PHP_EOL;
-    $str = $str . PHP_EOL . "function " . $id . "Data() {
+    $str = $str . PHP_EOL . "function " . $id . 'Data() {
  return  [ 
     {
-      key:"; 
+      key: "Home"'; 
     $str = $str . '"' . $title . '", values: [';
 
     while ($row = mysql_fetch_array($result)) {
