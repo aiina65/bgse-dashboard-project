@@ -130,7 +130,7 @@ MY_MARKER;
 
 }
 
-function query_and_print_circular_graph($query,$title,$ylabel) {
+function query_and_print_circular_graph($query,$title) {
     $id = "graph" . $GLOBALS['graphid'];
     $GLOBALS['graphid'] = $GLOBALS['graphid'] + 1;
     
@@ -152,15 +152,12 @@ function query_and_print_circular_graph($query,$title,$ylabel) {
         function " . $id . "Chart() {";
     $str = $str . <<<MY_MARKER
     nv.addGraph(function() {
-        var chart = nv.addGraph(function() {
-  var chart = nv.models.pieChart()
+      var chart = nv.models.pieChart()
       .x(function(d) { return d.label })
       .y(function(d) { return d.value })
       .showLabels(true)     //Display pie labels
       .labelThreshold(.05)  //Configure the minimum slice size for labels to show up
-      .labelType("percent") //Configure what type of data to show in the label. Can be "key", "value" or "percent"
-      ;
-
+      .labelType("percent");
   
 MY_MARKER;
 
@@ -169,7 +166,6 @@ MY_MARKER;
           .transition().duration(350)
           .call(chart);";
     $str = $str . <<<MY_MARKER
-      nv.utils.windowResize(chart.update);
 
       return chart;
     });
