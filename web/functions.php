@@ -159,13 +159,13 @@ function query_and_print_circular_graph($query,$title) {
        .labelType("percent");
   
 MY_MARKER;
-    $str = $str . PHP_EOL . 'chart.yAxis.axisLabel(" Things ").axisLabelDistance(30)';
+
     $str = $str . PHP_EOL . "d3.select('#" . $id . " svg')
           .datum(" . $id . "Data())
           .transition().duration(350)
           .call(chart);";
     $str = $str . <<<MY_MARKER
- nv.utils.windowResize(chart.update);
+ 
       return chart;
     });
 }    
@@ -174,13 +174,13 @@ MY_MARKER;
     $str = $str . PHP_EOL . "mycharts.push(". $id . "Chart)" . PHP_EOL;
     $str = $str . PHP_EOL . "function " . $id . "Data() {
  return  [ 
-    {"; 
-    $str = $str . '"' . $title . '", values: [';
+    "; 
+    $str = $str . '"' . $title . '", ';
 
     while ($row = mysql_fetch_array($result)) {
         $str = $str . '{ "label":"' . $row[0] . '","value":' . $row[1] . '},' . PHP_EOL;
     }    
-    $str = $str . '] } ] }</script>';
+    $str = $str . '  ] }</script>';
     echo $str;
 
 }
