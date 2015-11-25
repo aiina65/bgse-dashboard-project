@@ -317,13 +317,13 @@ MY_MARKER;
     $str = $str . PHP_EOL . "mycharts.push(". $id . "Chart)" . PHP_EOL;
     $str = $str . PHP_EOL . "function " . $id . "Data() { 
     var fx = [];
-    var fx2 = []";
+    var fx2 = [];";
   
     while ($row = mysql_fetch_array($result)) {
         $str = $str . "fx.push({x:" . $row[0] . ", y:" . $row[1] ."}); " . PHP_EOL;
     }
-    while ($row = mysql_fetch_array($result2)) {
-        $str = $str . "fx2.push({x:" . $row[0] . ", y:" . $row[1] ."}); " . PHP_EOL;
+    while ($row2 = mysql_fetch_array($result2)) {
+        $str = $str . "fx2.push({x:" . $row2[0] . ", y:" . $row2[1] ."}); " . PHP_EOL;
     }
 
     $str = $str . "
