@@ -132,15 +132,18 @@
     // Time series
     
     $query = "SELECT m.Season, avg(ms.LeaguePoints) FROM Project.Matches AS m, Project.MatchStat AS ms
-WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT * FROM (SELECT m.TeamID FROM Project.MatchStat AS m GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) DESC LIMIT 1) AS temp1)
-GROUP BY ms.TeamID, m.Season";
+WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT t.TeamID FROM Project.Teams AS t WHERE t.TeamName= 'Olympiakos' ) GROUP BY ms.TeamID, m.Season";
 
-$query2 = "SELECT m.Season, avg(ms.LeaguePoints) FROM Project.Matches AS m, Project.MatchStat AS ms
-WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT * FROM (SELECT m.TeamID FROM Project.MatchStat AS m GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) ASC LIMIT 1) AS temp1 )
-GROUP BY ms.TeamID, m.Season";
+    $query2 = "SELECT m.Season, avg(ms.LeaguePoints) FROM Project.Matches AS m, Project.MatchStat AS ms
+WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT t.TeamID FROM Project.Teams AS t WHERE t.TeamName= 'Bayern Munich' ) GROUP BY ms.TeamID, m.Season";
+    $query3 = "SELECT m.Season, avg(ms.LeaguePoints) FROM Project.Matches AS m, Project.MatchStat AS ms
+WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT t.TeamID FROM Project.Teams AS t WHERE t.TeamName= 'Man United' ) GROUP BY ms.TeamID, m.Season";
 
-    $title = "Line";
-query_and_print_more_series($query,$query, $title,"Best Team", "Best Team 2" );
+    $query4 = "SELECT m.Season, avg(ms.LeaguePoints) FROM Project.Matches AS m, Project.MatchStat AS ms
+WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT t.TeamID FROM Project.Teams AS t WHERE t.TeamName= 'Barcelona' ) GROUP BY ms.TeamID, m.Season";
+
+    $title = "Historical evolution of some teams";
+query_and_print_more_series($query,$query2,$query3,$query4, $title,"Olympiakos", "Bayern Munich", "Man United", "Barça");
 ?>
 
 <?php
