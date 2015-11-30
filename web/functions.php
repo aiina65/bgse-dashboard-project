@@ -258,7 +258,7 @@ MY_MARKER;
 }
 
 
-function query_and_print_more_series($query,$query2, $title,$label, $label2) {
+function query_and_print_more_series($query,$query2,$query3,$query4, $title,$label, $label2,$label3,$label4) {
     $id = "graph" . $GLOBALS['graphid'];
     $GLOBALS['graphid'] = $GLOBALS['graphid'] + 1;
     
@@ -268,6 +268,8 @@ function query_and_print_more_series($query,$query2, $title,$label, $label2) {
     // Perform Query
     $result = mysql_query($query);
     $result2 = mysql_query($query2);
+    $result3 = mysql_query($query3);
+    $result4 = mysql_query($query4);
 
 
     // Check result
@@ -317,13 +319,21 @@ MY_MARKER;
     $str = $str . PHP_EOL . "mycharts.push(". $id . "Chart)" . PHP_EOL;
     $str = $str . PHP_EOL . "function " . $id . "Data() { 
     var fx = [];
-    var fx2 = [];";
+    var fx2 = [];
+    var fx3 = [];
+    var fx4 = [];";
   
     while ($row = mysql_fetch_array($result)) {
         $str = $str . "fx.push({x:" . $row[0] . ", y:" . $row[1] ."}); " . PHP_EOL;
     }
     while ($row2 = mysql_fetch_array($result2)) {
         $str = $str . "fx2.push({x:" . $row2[0] . ", y:" . $row2[1] ."}); " . PHP_EOL;
+    }
+    while ($row3 = mysql_fetch_array($result3)) {
+        $str = $str . "fx3.push({x:" . $row3[0] . ", y:" . $row3[1] ."}); " . PHP_EOL;
+    }
+    while ($row4 = mysql_fetch_array($result4)) {
+        $str = $str . "fx4.push({x:" . $row4[0] . ", y:" . $row4[1] ."}); " . PHP_EOL;
     }
 
     $str = $str . "
@@ -338,6 +348,18 @@ MY_MARKER;
     {
       values: fx2,
       key: '" . $label2 . " ',
+      color: '#ff7f0e',
+      area: false      //area - set to true if you want this line to turn into a filled area chart.
+    }, 
+    {
+      values: fx3,
+      key: '" . $label3 . " ',
+      color: '#ff7f0e',
+      area: false      //area - set to true if you want this line to turn into a filled area chart.
+    }, 
+    {
+      values: fx4,
+      key: '" . $label4 . " ',
       color: '#ff7f0e',
       area: false      //area - set to true if you want this line to turn into a filled area chart.
     }
