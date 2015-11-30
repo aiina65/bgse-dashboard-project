@@ -127,3 +127,6 @@ CREATE table TableEvolution (
     Goal_difference int(4),
     Total_points int(3)
 );
+
+CREATE INDEX Team ON Project.MatchStat (TeamID)
+CREATE INDEX Bet ON Project.Bets (CompanyCode)
