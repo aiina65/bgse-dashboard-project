@@ -341,7 +341,7 @@ MY_MARKER;
     return [
     {
       values: fx,
-      key: '" . $label1 . " ',
+      key: '" . $label . " ',
       color: '#7777ff',
       area: false      //area - set to true if you want this line to turn into a filled area chart.
     }, 
@@ -354,13 +354,13 @@ MY_MARKER;
     {
       values: fx3,
       key: '" . $label3 . " ',
-      color: '#ff7f0e',
+      color: '#c4d551',
       area: false      //area - set to true if you want this line to turn into a filled area chart.
     }, 
     {
       values: fx4,
       key: '" . $label4 . " ',
-      color: '#ff7f0e',
+      color: '#816fa9',
       area: false      //area - set to true if you want this line to turn into a filled area chart.
     }
 

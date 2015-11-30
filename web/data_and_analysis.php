@@ -143,7 +143,7 @@ WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT t.TeamID FROM Project.Team
 WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT t.TeamID FROM Project.Teams AS t WHERE t.TeamName= 'Barcelona' ) GROUP BY ms.TeamID, m.Season";
 
     $title = "Historical evolution of some teams";
-query_and_print_more_series($query,$query2,$query3,$query4, $title,"Olympiakos", "Bayern Munich", "Man United", "Barça");
+query_and_print_more_series($query,$query2,$query3,$query4, $title,"Olympiakos", "Bayern Munich", "Man United", "Barcelona");
 ?>
 
 <?php
