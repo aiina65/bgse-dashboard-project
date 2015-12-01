@@ -128,6 +128,6 @@ CREATE table TableEvolution (
     Total_points int(3)
 );
 
-CREATE INDEX Team ON Project.Teams (TeamID);
+/*CREATE INDEX Team ON Project.Teams (TeamID);
 CREATE INDEX Team2 ON Project.MatchStat (TeamID);
-CREATE INDEX Bet ON Project.Bets (CompanyCode);
+CREATE INDEX Bet ON Project.Bets (CompanyCode);*/
