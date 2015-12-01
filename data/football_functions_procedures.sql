@@ -375,3 +375,20 @@ ORDER BY t.LeagueID, total_points desc;
 
 END //
 DELIMITER ;
+
+
+DROP FUNCTION IF EXISTS win_odd;
+DELIMITER //
+CREATE FUNCTION win_odd(MId double, result varchar(1), code VARCHAR(4) ) 
+RETURNS int
+BEGIN
+    declare odd double;
+    
+    if result = 'H' then set odd = (SELECT b.HomeWinOdds FROM Project.Bets AS b WHERE b.MatchId = MId AND b.CompanyCode = code);
+    elseif result = 'A' then set odd = (SELECT b.AwayWinOdds FROM Project.Bets AS b WHERE b.MatchId = MId AND b.CompanyCode = code);
+    elseif result = 'D' then set odd = (SELECT b.DrawOdds FROM Project.Bets AS b WHERE b.MatchId = MId AND b.CompanyCode = code);
+    end if;
+
+    RETURN odd;
+END //
+DELIMITER ;

@@ -43,7 +43,7 @@ CREATE TABLE Matches (
 
 
 create table BettingCompanies (
-	CompanyCode varchar(7),
+	CompanyCode varchar(4),
 	CompanyName varchar(25),
     
 primary key (CompanyCode)
