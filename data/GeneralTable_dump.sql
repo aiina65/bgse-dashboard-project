@@ -69,8 +69,8 @@ BSA DOUBLE
 
 );
 
-/*CREATE INDEX TeamH ON Project.GeneralTable (HomeTeam);
-CREATE INDEX TeamA ON Project.GeneralTable (AwayTeam);*/
+CREATE INDEX TeamH ON Project.GeneralTable (HomeTeam);
+CREATE INDEX TeamA ON Project.GeneralTable (AwayTeam);
 
 LOAD DATA LOCAL INFILE 'data/GeneralTable.csv' 
 INTO TABLE GeneralTable 
