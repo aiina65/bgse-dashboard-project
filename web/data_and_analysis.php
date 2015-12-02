@@ -164,6 +164,20 @@ query_and_print_series($query,$title,"Worst Team");
 	  
 	<p>Blablabla.</p>
 
+  <?php
+	$query = "SELECT * FROM Project.Matching";
+	$title = "Recommendation: safe";
+	query_and_print_table($query,$title);
+	echo "";
+?>
+
+  <?php
+	$query = "SELECT * FROM Project.MatchingRisk";
+	$title = "Recommendation: risky";
+	query_and_print_table($query,$title);
+	echo "";
+?>
+
 		</div>
 <?php
 	// Close connection
