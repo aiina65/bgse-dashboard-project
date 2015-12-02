@@ -60,5 +60,5 @@ maxmatching_risk <- data.frame( "Betting Company" = rownames(matches_risk)[1:num
 
 
 dbSendQuery(db,"drop table if exists MatchingRisk")
-dbWriteTable(conn = db,name="MatchingRisk", value=maxmatching, row.names=FALSE)
+dbWriteTable(conn = db,name="MatchingRisk", value=maxmatching_risk, row.names=FALSE)
 
