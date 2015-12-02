@@ -2,7 +2,7 @@ library(RMySQL)
 library(igraph)
 
 ## Connection to SQL
-db = dbConnect(MySQL(), user='root', password='' , dbname='Project', host='localhost')
+db = dbConnect(MySQL(), user='root', password='root' , dbname='Project', host='localhost')
 
 ## Import data
 result    <- dbSendQuery(db, "SELECT b.CompanyCode, t.TeamName, avg(b.PredictionSuccess), avg(b.PredictionSuccess)*count(*) as Score
@@ -35,7 +35,7 @@ dbWriteTable(conn = db,name="Matching", value=maxmatching, row.names=FALSE)
 #########################################
 ############# SECOND OPTION ############# 
 #########################################
-db = dbConnect(MySQL(), user='root', password='' , dbname='Project', host='localhost')
+db = dbConnect(MySQL(), user='root', password='root' , dbname='Project', host='localhost')
 
 ## Import data
 result_risk    <- dbSendQuery(db, "SELECT b.CompanyCode, t.TeamName, avg(b.PredictionSuccess), avg(b.PredictionSuccess)*count(*)*avg(win_odd(m.MatchId, m.Result, b.CompanyCode)) as Score
