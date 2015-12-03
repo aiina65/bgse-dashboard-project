@@ -62,7 +62,7 @@ function show_content(optionsId) {
 			<h2>Home</h2>
 			<h3>The challenge</h3>
 			
-			<p>Every sales team seeks to identify and exploit opportunities to increase sales. In addition to acquiring new customers, another way to increase sales is to target existing customers by providing them with relevant offers that might persuade them to purchase additional items. In order to be able to do that, a sales team would need to be able to build up offers that customers truly value and to identify those customers that are more likely to purchase new items.</p>
+			<p>Changes. Every sales team seeks to identify and exploit opportunities to increase sales. In addition to acquiring new customers, another way to increase sales is to target existing customers by providing them with relevant offers that might persuade them to purchase additional items. In order to be able to do that, a sales team would need to be able to build up offers that customers truly value and to identify those customers that are more likely to purchase new items.</p>
 			
 			<ul style="list-style-type:circle">
   				<li> The first objective can be achieved by developing a recommendation engine which, based on a customer's intended purchases can recommend additional items that are related to those already in the shopping basket. </li>
