@@ -62,11 +62,11 @@ function show_content(optionsId) {
 			<h2>Home</h2>
 			<h3>The challenge</h3>
 			
-  <p> Odds reflect the likelihood of a a certain event. In football matches, betting companies define three odds for each match: home win odd, away win odd and draw odd.  Each odd represents the amount that a person is going to earn if the team for which he bet wins. Therefore, the lowest odd is the most likely result. In order to maximize the revenues winned when betting in football matches, we would like to find for which teams do we have to bet in each betting company. Another way to also maximize the amount of money winned when gambling, is to BLABLABLAs.</p>
+  <p> Odds reflect the likelihood of a a certain event. In football matches, betting companies define three odds for each match: home win odd, away win odd and draw odd.  Each odd represents the amount that a person is going to earn if the team for which he bet wins. Therefore, the lowest odd is the most likely result. In order to maximize the revenues winned when betting in football matches, we would like to find for which teams do we have to bet in each betting company. Another way to also maximize the amount of money winned when gambling, is to BLABLABLA.</p>
 			
 			<ul style="list-style-type:circle">
-  				<li> The first objective can be achieved by developing a recommendation engine which, based on a customer's intended purchases can recommend additional items that are related to those already in the shopping basket. </li>
-  				<li> The second objective can be achieved by analyzing the average contribution that existing customers make across the entire product line. This is based on the belief that customers that have historically generated the highest revenues are not necessarily the same ones with the highest marginal revenue potential.</li>
+																																																						       <li> The first objective can be achieved by developing a recommendation engine which, based on betting companies prediction success in previous matches it is possible to recommend in which matches is more safe to bet.</li>
+  				<li> The second objective can be achieved by BLABLABLA.</li>
 			</ul>
 			
 			<h3>The solution</h3>
