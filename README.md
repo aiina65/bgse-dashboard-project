@@ -15,11 +15,10 @@ The ultimate goal is to provide information that can be used by a marketing depa
 
 The core of the analysis is contained in these three files:
 
-- `Customers_by_product.sql`
 - `data_and_analysis.php`
 - `analysis.R`
 
-Note that some of the key `SQL` queries, to generate the data for the analysis but also to create a network graph, are contained in both the `R` file and the additional `Customers_by_product.sql` file. The latter is called by the setup script after the database is populated.
+Note that some of the key `SQL` queries, to generate the data for the analysis, are contained in the `R` file. The latter is called by the setup script after the database is populated.
 
 ### Implementation
 
@@ -31,11 +30,10 @@ The 'Data' tab includes a network graph of the links between product categories.
 
 ### Required packages
 
-The `R` analysis relies on the following packages. 
+The `R` analysis relies on the following package. 
 
 - `igraph`
-- `arules`
-- `lars`
+
 
 ## Acknowledgments
 
