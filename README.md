@@ -1,15 +1,13 @@
-# BGSE Dashboard Project: Product Recommendation and Customer Analysis
+# BGSE Dashboard Project: Historical football match data and betting odds
 
 ### Overview
 
-This project implements a product recommendation algorithm and carries out customer analysis using LASSO regression. 
+This project implements a recommendation engine for making safe bettings and also a football match predictor. 
 
 The objectives of the project are:
 
-- Develop a set of product recommendation rules, based on the Apriori algorithm
-- Rank customers on the basis of their marginal contribution to revenues.
-
-The ultimate goal is to provide information that can be used by a marketing department to develop more targeted campaigns.
+- Develop a set of betting odds recommendation rules, based on the push-relabel algorithm
+- Predict the outcome of a match given data from past matches. 
 
 ### Structure
 
@@ -22,11 +20,9 @@ Note that some of the key `SQL` queries, to generate the data for the analysis, 
 
 ### Implementation
 
-To develop the product recommendation system we have used the Apriori algorithm. We provide a link to the relevant Wikipedia article on the introductory page of the web application.
+To develop the betting odd recommendation engine we have used the push-relabel algorithm.  
 
-To develop the LASSO regression, we first have identified the top 20 customers in terms of total revenues generated. Then we have carried out a LASSO regression using the `lars` package with the objective to narrow down the number of customers with a significant marginal contribution to revenues. 
-
-The 'Data' tab includes a network graph of the links between product categories. Note that the graph is generated dynamically each time the `./setup.sh run` command is given. The script saves a `.png` file in the `/web` sub-directory, which is then retrieved via `html` link.
+The 'Data' tab includes a network graph of the links between product categories. Note that the graph is generated dynamically each time the `./setup.sh run` command is given. 
 
 ### Required packages
 
