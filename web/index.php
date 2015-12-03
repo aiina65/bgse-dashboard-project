@@ -62,10 +62,7 @@ function show_content(optionsId) {
 			<h2>Home</h2>
 			<h3>The challenge</h3>
 			
-  <p> Odds reflect the likelihood of a a certain event. In football matches, betting companies define three odds for each match: home win odd, away win odd and draw odd. The lowest odd is the most likely result. Also, the odd represents the amount that a person is going to earn if the team that he bet for wins. 
-
-
-  Every sales team seeks to identify and exploit opportunities to increase sales. In addition to acquiring new customers, another way to increase sales is to target existing customers by providing them with relevant offers that might persuade them to purchase additional items. In order to be able to do that, a sales team would need to be able to build up offers that customers truly value and to identify those customers that are more likely to purchase new items.</p>
+  <p> Odds reflect the likelihood of a a certain event. In football matches, betting companies define three odds for each match: home win odd, away win odd and draw odd.  Each odd represents the amount that a person is going to earn if the team for which he bet wins. Therefore, the lowest odd is the most likely result. In order to maximize the revenues winned when betting in football matches, we would like to find for which teams do we have to bet in each betting company. Another way to also maximize the amount of money winned when gambling, is to BLABLABLAs.</p>
 			
 			<ul style="list-style-type:circle">
   				<li> The first objective can be achieved by developing a recommendation engine which, based on a customer's intended purchases can recommend additional items that are related to those already in the shopping basket. </li>
@@ -76,7 +73,7 @@ function show_content(optionsId) {
 						
 			<p>We have addressed the above challenges in the following steps steps:</p>
 				<ul style="list-style-type:circle">
-					<li> First we have implemented a simple recommendation engine, based on the <b><a href="https://en.wikipedia.org/wiki/Push–relabel_maximum_flow_algorithm" target="_blank">Push relabel algorithm.</a></b>. Although this algorithm finds the maximum flow it can be easily changed to find the maximum matching in bipartite graphs. The weights of the nodes used reflect the prediction success of each betting company predicting matches of each team. The output of the algorithm is a set of betting company and team pairs which can be interpreted as the teams whose matches are better predicted by each betting company. Then, when betting, the better option is to bet for the lowest betting odd in that match.</li>
+					<li> First we have implemented a simple recommendation engine, based on the <b><a href="https://en.wikipedia.org/wiki/Push-relabel_maximum_flow_algorithm" target="_blank">Push relabel algorithm.</a></b>. Although this algorithm finds the maximum flow it can be easily changed to find the maximum matching in bipartite graphs. The weights of the nodes used reflect the prediction success of each betting company predicting matches of each team. The output of the algorithm is a set of betting company and team pairs which can be interpreted as the teams whose matches are better predicted by each betting company. Then, when betting, the better option is to bet for the lowest betting odd in that match.</li>
 
 					<li> To address the second part of the challenge, BLABLABLA.</li>
 				</ul>
