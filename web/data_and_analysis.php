@@ -162,7 +162,9 @@ query_and_print_series($query,$title,"Worst Team");
 	<div id="analysis" style="display: none">
 	<h2>Analysis</h2>
 	  
-	<p>Blablabla.</p>
+  <p>Below, we show the betting recommendations (betting company - team) obtained from the maximum matching algorithm. Notice that for each company, it is shown the team whose match result is more predictable. Then, when betting, the better option is to bet for the lowest betting odd.</p>
+
+  <p>This table shows the most safe combination of betting companies - teams.</p>
 
   <?php
 	$query = "SELECT * FROM Project.Matching";
@@ -171,6 +173,8 @@ query_and_print_series($query,$title,"Worst Team");
 	echo "";
 ?>
 
+
+<p>This table shows a more risky combination of betting companies - teams, but with higher revenues expected.</p>
   <?php
 	$query = "SELECT * FROM Project.MatchingRisk";
 	$title = "Recommendation: risky";
