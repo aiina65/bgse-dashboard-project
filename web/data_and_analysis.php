@@ -13,9 +13,9 @@
 	
 	<h2>Data</h2>
 	
-	<p>Blablabla</p>
+	  <p>In this section we carry out an initial analysis of our data, with the objective of understanding if we can treat all data as equal or if we have to subsample.</p>
 	
-	<p> The chart below shows the 10 best teams of the history.</p>
+	<p> The chart below shows the top 10 best teams of the history ranked according to the average league points they scored.</p>
 
 <?php
     // Teams, winned games
@@ -29,7 +29,7 @@
 ?>
 
 	
-	<p>The chart below shows the results of a similar analysis, this time the 10 worst teams of the history.</p>
+	<p>The chart below shows the results of a similar analysis, this time with the 10 worst teams of the history.</p>
 	
 <?php
 	// Page body. Write here your queries
@@ -43,7 +43,7 @@
 ?>
 
 
-	<p>Blablabla.</p>
+<p>Once we have seen the difference between best/worst teams, we are going to analyse the difference between teams playing home and away. It is interesting to notice that teams playing home in average win more and teams playing away commit more fouls.</p>
 	
 <?php
 	// Page body. Write here your queries
@@ -100,8 +100,8 @@
        query_and_print_multiple_graph($query,$query2,$title,"Average Number of Units");
 ?>
 
-
-	<p>Blablabla.</p>
+<p> In order to see if all the betting companies perform similary, we are interested in observing their performance.</p>
+<p> The chart below shows the percentage of prediction succes of each betting company.</p>
 <?php
 	// Page body. Write here your queries
 	
@@ -112,7 +112,7 @@
 	query_and_print_circular_graph($query,$title);
 ?>
 
-	<p>Blablabla.</p>
+<p>The following chart shows a similar analysis. This time, we plot the prediction accuracy per country.</p>
 <?php
 	// Page body. Write here your queries
 	
@@ -124,9 +124,7 @@
 	query_and_print_circular_graph($query,$title);
 ?>
 
-	<p>Blablabla.</p>
-
-
+<p>Finally, we also want to see the historical evolution of teams. The chart below shows the average league points of four good teams in different seasons. </p>
 
 <?php
     // Time series
@@ -146,17 +144,9 @@ WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT t.TeamID FROM Project.Team
 query_and_print_more_series($query,$query2,$query3,$query4, $title,"Olympiakos", "Bayern Munich", "Man United", "Barcelona");
 ?>
 
-<?php
-    // Time series
+<p>The previous charts show us that the betting companies are very similar accross teams and countries and we can use all the data in our next analysis.</p>
 
-$query = "SELECT m.Season, avg(ms.LeaguePoints) FROM Project.Matches AS m, Project.MatchStat AS ms
-WHERE m.MatchID = ms.MatchID AND ms.TeamID IN (SELECT * FROM (SELECT m.TeamID FROM Project.MatchStat AS m GROUP BY m.teamID ORDER BY avg(m.LeaguePoints) ASC LIMIT 1) AS temp1)
-GROUP BY ms.TeamID, m.Season";
-
-    $title = "Line";
-query_and_print_series($query,$title,"Worst Team");
-?>
-
+<p> In the next tab, we take this analysis further by implementing a betting recommendation engine and by regressing our data to try to predict the final outcome of a match.</p>
 	  
 	</div>
 	<div id="analysis" style="display: none">
