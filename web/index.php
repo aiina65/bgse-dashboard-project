@@ -75,7 +75,7 @@ function show_content(optionsId) {
 				<ul style="list-style-type:circle">
   <li> First we have implemented two simple recommendation engines, based on the <b><a href="https://en.wikipedia.org/wiki/Push-relabel_maximum_flow_algorithm" target="_blank">Push relabel algorithm.</a></b>. Although this algorithm finds the maximum flow it can be easily changed to find the maximum matching in bipartite graphs. The difference between the two systems is the formula applied to compute the bets for each nodes: one model returns the most safe option and the other returns a more risky option with a higher revenue. This weights reflect the prediction success of each betting company predicting matches of each team. The output of the algorithms is a set of betting company and team pairs which can be interpreted as the teams whose matches are better predicted by each betting company. Then, when betting, the better option is to bet for the lowest betting odd in that match.</li>
 
-					<li> To address the second part of the challenge, BLABLABLA.</li>
+  <li> To address the second part of the challenge, forecasting the result of a match, first we have regressed the match odds against the factors: where the match is played, position (in league table) currently, position last season, and the corresponding for the opposition team. A beta regression was used on the “inverted odds” to make interpretation as a probability easier. A similar approach was on the actual match result, using a binomial GLM. The same factors, including the goals against and for that team over the course of a season, were used.</li>
 				</ul>
 						
 		</div>	
