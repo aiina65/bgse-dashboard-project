@@ -170,7 +170,19 @@ query_and_print_more_series($query,$query2,$query3,$query4, $title,"Olympiakos",
 	query_and_print_table($query,$title);
 	echo "";
 ?>
+<p> We want to look at how betting companies design their match odds based on pre-match factors, and then look at how these can be used to model the result.</p>
 
+<p> We regressed, using a beta regression for match odds and a binomial GLM for match prediction, against the position in the table before the match and for the last season, dividing the standing into "ranks". Then also adding in this information for the opposition team. Goals scored and where the match was played, was also considered.</p>
+	
+<center><img src="betcoeffgraph.png" style="width: 40%"></center>
+
+<center><img src="predcoeffgraph.png" style="width: 40%"></center>
+
+<p> The graphs show in green the coefficients for winning, in red for losing, and in blue for drawing. There is a nice pattern formed, as expected. <\p>
+
+<p> Then, looking at the accuracies over different leagues, it can be seen that these basic factors have a significant effect on the match and are effective predictors.</p>
+
+<center><img src="Accuracy.png" style="width: 40%"></center>
 		</div>
 <?php
 	// Close connection
