@@ -94,6 +94,7 @@ result = dbSendQuery(db,"SELECT m.Season, l.League, m.MatchDate,
 
 match.data = fetch(result, n=-1)
 
+# Building a function to clean the data in the way that I want for the regression
 data.cleanup <- function(match.data, nmatches, nteams){
   # Defining home and away variables
   match.data$HomeAway <- ifelse(match.data$HomeAway == "H", 1, 0)
