@@ -339,7 +339,7 @@ pred.win <- coef(mod.win)
 pred.lose <- coef(mod.lose)
 pred.draw <- coef(mod.draw)
 
-jpeg("betcoeffgraph.jpg", width = 650)
+png("web/betcoeffgraph.png", width = 650)
 plot(beta.win,col="green",xaxt="n", xlab="Coefficients", ylab="value", ylim=c(-1.5,1.5),
      main = "Beta Regression Betting Odds")
 points(beta.lose,col="red")
@@ -347,7 +347,7 @@ points(beta.draw,col="blue")
 axis(1,at=1:13,labels = names(beta.win),cex.axis=0.6)
 dev.off()
 
-jpeg("predcoeffgraph.jpg", width = 650)
+png("web/predcoeffgraph.png", width = 650)
 plot(pred.win,col="green",xaxt="n", xlab="Coefficients", ylab="value", ylim=c(-1.5,1.5),
      main = "Match Prediction GLM")
 points(pred.lose,col="red")
