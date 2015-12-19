@@ -29,6 +29,7 @@ The 'Data' tab includes a network graph of the links between product categories.
 The `R` analysis relies on the following package. 
 
 - `igraph`
+- `betareg`
 
 
 ## Acknowledgments
