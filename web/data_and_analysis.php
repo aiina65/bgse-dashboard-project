@@ -183,6 +183,23 @@ query_and_print_more_series($query,$query2,$query3,$query4, $title,"Olympiakos",
 <p> Then, looking at the accuracies over different leagues, it can be seen that these basic factors have a significant effect on the match and are effective predictors.</p>
 
 <center><img src="Accuracy.png" style="width: 40%"></center>
+
+<h3>Goals predictions</h3>
+<p> The following part is based on the <a href="http://www.sumsar.net/blog/2013/07/modeling-match-results-in-la-liga-part-one/" target="_blank">methodolody developed by R. Baath</a>.  Implementing Hierarchical Bayesian Poisson Model with the help of JAGS package allowed to obtain estimation of a football team's skill depending on the home/away condition and by seasons. </p>
+
+<p> For demonstration purposes the data presented here is reduced up to English Premier League, however, the results are applicable throughout all the data available. Seasonality influences a team's performance. Hence, for choosing the safe bet strategy, one might be interested in the most persistenly paticipating teams. Below is shown the availability of the English teams throughout seasons.</p>
+<center><img src="participation_by_season.png" style="width: 40%"></center>
+
+<p> Modelling the teams skills sets up a clear presentation of favourites and not so well performing teams. The season of 2015 has Liverpool, Man United, Arsenal, Chelsea, and Man City among its leaders.</p>
+<center><img src="skills-2015.png" style="width: 40%"></center>
+
+<p> And numerically, the success of the model can be compared with the results know. On one hand, the guess for the correct number of home goals is 34% of the time with a mean squared error of 1.44. For the number of correct away goals the statistics is 39.2% and 1.09. On the other hand, overall the model constructed predicts the correct match outcome 54.47% of the times. Graphically, the distribution of the randomized match results does not look different from the actual observations.</p>
+<center><img src="overall_matches.png" style="width: 40%"></center>
+
+<p> With the analysis performed it is finally possible to narrow down findings to the scale of a given match. If the results of the last available match in the dataset were not known, the predicted distributions of the goals for the game would look in the following way:</p>
+<center><img src="last_match.png" style="width: 40%"></center>
+
+<p> The model constructed suggests the payouts for the game as Stoke: 3.184713, Draw: 3.727634 and Liverpool: 2.393872. The betting companies provide higher beeting odds for the Stroke home win than the model. Which is the desirable outcome that supports a safer betting strategy than none at all.</p>
 		</div>
 <?php
 	// Close connection
