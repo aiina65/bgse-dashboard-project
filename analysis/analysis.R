@@ -354,3 +354,180 @@ points(pred.lose,col="red")
 axis(1,at=1:16,labels = names(pred.win),cex.axis=0.6)
 dev.off()
 
+### Goal predictions
+library(RMySQL)
+library(dplyr)
+library(ggplot2)
+library(rjags)
+library(coda)
+# connection to SQL
+db = dbConnect(MySQL(), user='root', password='' , dbname='Project', host='localhost')
+# import data
+result = dbSendQuery(db, "select * from (select th.TeamName as HomeTeam,
+                     ta.TeamName as AwayTeam,
+                     m.Result,
+                     m.MatchID,
+                     m.MatchDate,
+                     l.Country,
+                     msh.FullTimeGoals as HomeGoals,
+                     msa.FullTimeGoals as AwayGoals
+                     FROM Matches m JOIN Leagues l ON m.LeagueID = l.LeagueID
+                     JOIN Teams th ON m.HomeTeamID = th.TeamID
+                     JOIN Teams ta ON m.AwayTeamID = ta.TeamID
+                     JOIN MatchStat msh ON m.MatchID = msh.MatchID AND msh.HomeAway = 'H'
+                     JOIN MatchStat msa ON m.MatchID = msa.MatchID AND msa.HomeAway = 'A'
+                     Where msh.FullTimeGoals is not null
+                     and msa.FullTimeGoals is not null)
+                     as ttt
+                     order by ttt.MatchID;")
+relations = fetch(result, n=100000000000)
+
+# adding columns of numeric outcome and seasons
+or <- na.omit(relations)
+or$Outcome <- sign(or$HomeGoals - or$AwayGoals)
+or$Season <- format(as.Date(or$MatchDate, "%Y-%m-%d"), format="%Y")
+
+# separating countries
+Countries <- unique(or$Country)
+
+# subset England, participation by season
+en <- subset(or, or$Country == Countries[3])
+en <- en[order(en$Season),] 
+Teams <- unique(c(en$HomeTeam, en$AwayTeam))
+Seasons <- unique(format(as.Date(en$MatchDate, "%Y-%m-%d"), format="%Y"))
+png("web/participation_by_season.png")
+qplot(Season, HomeTeam, data = en, ylab = "Team", xlab = "Participation by Season, en")
+dev.off
+
+# preparing rjags
+data_list <- list(HomeGoals = en$HomeGoals, AwayGoals = en$AwayGoals,
+                  HomeTeam = as.numeric(factor(en$HomeTeam, levels = Teams)),
+                  AwayTeam = as.numeric(factor(en$AwayTeam, levels = Teams)),
+                  Season = as.numeric(factor(en$Season, levels = Seasons)),
+                  n_teams = length(Teams),
+                  n_games = nrow(en), n_seasons = length(Seasons))
+col_name <- function(name, ...) {
+  paste0(name, "[", paste(..., sep = ","), "]") }
+
+# the model
+m_string <- "model { for(i in 1:n_games) {
+HomeGoals[i] ~ dpois(lambda_home[Season[i], HomeTeam[i],AwayTeam[i]])
+AwayGoals[i] ~ dpois(lambda_away[Season[i], HomeTeam[i],AwayTeam[i]]) }
+
+for(season_i in 1:n_seasons) {
+  for(home_i in 1:n_teams) {
+    for(away_i in 1:n_teams) {
+lambda_home[season_i, home_i, away_i] <- exp( home_baseline[season_i] + skill[season_i, home_i] - skill[season_i, away_i])
+lambda_away[season_i, home_i, away_i] <- exp( away_baseline[season_i] + skill[season_i, away_i] - skill[season_i, home_i]) } }
+}
+skill[1, 1] <- 0 
+for(j in 2:n_teams) { skill[1, j] ~ dnorm(group_skill, group_tau) }
+group_skill ~ dnorm(0, 0.0625)
+group_tau <- 1/pow(group_sigma, 2)
+group_sigma ~ dunif(0, 3)
+home_baseline[1] ~ dnorm(0, 0.0625)
+away_baseline[1] ~ dnorm(0, 0.0625)
+for(season_i in 2:n_seasons) { skill[season_i, 1] <- 0 
+  for(j in 2:n_teams) { skill[season_i, j] ~ dnorm(skill[season_i - 1, j], season_tau) }
+  home_baseline[season_i] ~ dnorm(home_baseline[season_i - 1], season_tau)
+  away_baseline[season_i] ~ dnorm(away_baseline[season_i - 1], season_tau) }
+season_tau <- 1/pow(season_sigma, 2) 
+season_sigma ~ dunif(0, 3) }"
+
+#running jags and collecting samples
+m <- jags.model(textConnection(m_string), data = data_list, n.chains = 3,
+                 n.adapt = 10000)
+# update(m, 10000)
+s <- coda.samples(m, variable.names = c("home_baseline", "away_baseline",
+                                          "skill", "season_sigma", "group_sigma", "group_skill"), n.iter = 10000, thin = 2)
+ms <- as.matrix(s)
+
+# skills for season 2015
+team_skill <- ms[, str_detect(string = colnames(ms), "skill\\[16,")]
+team_skill <- (team_skill - rowMeans(team_skill)) + ms[, "home_baseline[16]"]
+team_skill <- exp(team_skill)
+colnames(team_skill) <- Teams
+team_skill <- team_skill[, order(colMeans(team_skill), decreasing = T)]
+png("web/skills-2015.png")
+par(mar = c(2, 0.7, 0.7, 0.7), xaxs = "i")
+caterplot(team_skill, labels.loc = "above", val.lim = c(0.7, 3.8))
+dev.off()
+
+# predictions
+n <- nrow(ms)
+m_pred <- sapply(1:nrow(en), function(i) {
+  home_team <- which(Teams == en$HomeTeam[i])
+  away_team <- which(Teams == en$AwayTeam[i])
+  season <- which(Seasons == en$Season[i])
+  home_skill <- ms[, col_name("skill", season, home_team)]
+  away_skill <- ms[, col_name("skill", season, away_team)]
+  home_baseline <- ms[, col_name("home_baseline", season)]
+  away_baseline <- ms[, col_name("away_baseline", season)]
+  home_goals <- rpois(n, exp(home_baseline + home_skill - away_skill))
+  away_goals <- rpois(n, exp(away_baseline + away_skill - home_skill))
+  home_goals_table <- table(home_goals)
+  away_goals_table <- table(away_goals)
+  match_results <- sign(home_goals - away_goals)
+  match_results_table <- table(match_results)
+  mode_home_goal <- as.numeric(names(home_goals_table)[ which.max(home_goals_table)])
+  mode_away_goal <- as.numeric(names(away_goals_table)[ which.max(away_goals_table)])
+  match_result <-  as.numeric(names(match_results_table)[which.max(match_results_table)])
+  rand_i <- sample(seq_along(home_goals), 1)
+  c(mode_home_goal = mode_home_goal, mode_away_goal = mode_away_goal, match_result = match_result,
+    mean_home_goal = mean(home_goals), mean_away_goal = mean(away_goals),
+    rand_home_goal = home_goals[rand_i], rand_away_goal = away_goals[rand_i],
+    rand_match_result = match_results[rand_i])
+})
+m_pred <- t(m_pred)
+
+# how good are predicitons
+mean(en$HomeGoals == m_pred[, "mode_home_goal"], na.rm = T)
+mean((en$HomeGoals - m_pred[, "mean_home_goal"])^2, na.rm = T)
+mean(en$Outcome == m_pred[, "match_result"], na.rm = T)
+
+# plotting actual versus randomized predicted match results
+png("web/overall_matches.png")
+par(mfcol = c(2, 1), mar = rep(2.5, 4))
+hist(en$Outcome, breaks = (-2:1) + 0.5, main = "Actual match results", xlab = "")
+hist(m_pred[, "rand_match_result"], breaks = (-2:1) + 0.5, main = "Randomized match results", xlab = "")
+dev.off()
+
+# looking at the last available match as ifs results were unknown
+n <- nrow(ms)
+home_team <- which(Teams == "Stoke")
+away_team <- which(Teams == "Liverpool")
+season <- which(Seasons == "2015")
+home_skill <- ms[, col_name("skill", season, home_team)]
+away_skill <- ms[, col_name("skill", season, away_team)]
+home_baseline <- ms[, col_name("home_baseline", season)]
+away_baseline <- ms[, col_name("away_baseline", season)]
+home_goals <- rpois(n, exp(home_baseline + home_skill - away_skill))
+away_goals <- rpois(n, exp(away_baseline + away_skill - home_skill))
+plot_goals <- function(home_goals, away_goals) {
+  n_matches <- length(home_goals)
+  goal_diff <- home_goals - away_goals
+  match_result <- ifelse(goal_diff < 0, "away_win", ifelse(goal_diff > 0, "home_win", "equal"))
+  hist(home_goals, xlim = c(-0.5, 10), breaks = (0:100) - 0.5, main = "Home Goals")
+  hist(away_goals, xlim = c(-0.5, 10), breaks = (0:100) - 0.5, main = "Away Goals")
+  hist(goal_diff, xlim = c(-6, 6), breaks = (-100:100) - 0.5, main = "Goal Diff")
+  barplot(table(match_result)/n_matches, ylim = c(0, 1), main = "Outcomes") }
+
+# plotting the pseudo-prediction
+png("web/last_match.png")
+par(mfrow = c(2, 2), mar = rep(2.2, 4))
+plot_goals(home_goals, away_goals)
+dev.off()
+
+# comparing with bets
+1/c(Stoke = mean(home_goals > away_goals), Draw = mean(home_goals == away_goals),
+    Liverpool = mean(home_goals < away_goals))
+
+# calculating payout for different goals possibilities
+goals_payout <- laply(0:6, function(home_goal) {
+  laply(0:6, function(away_goal) {
+    1/mean(home_goals == home_goal & away_goals == away_goal)
+  })
+})
+colnames(goals_payout) <- paste("Liverpool", 0:6, sep = " - ")
+rownames(goals_payout) <- paste("Stoke", 0:6, sep = " - ")
+goals_payout <- round(goals_payout, 1)
