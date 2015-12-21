@@ -361,7 +361,7 @@ library(ggplot2)
 library(rjags)
 library(coda)
 # connection to SQL
-db = dbConnect(MySQL(), user='root', password='' , dbname='Project', host='localhost')
+db = dbConnect(MySQL(), user='root', password='root' , dbname='Project', host='localhost')
 # import data
 result = dbSendQuery(db, "select * from (select th.TeamName as HomeTeam,
                      ta.TeamName as AwayTeam,
