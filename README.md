@@ -30,6 +30,11 @@ The `R` analysis relies on the following package.
 
 - `igraph`
 - `betareg`
+- `rjags`
+- `coda`
+- `dplyr`
+- `ggplot2`
+- `RmySQL`
 
 
 ## Acknowledgments
