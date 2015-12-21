@@ -151,7 +151,8 @@ query_and_print_more_series($query,$query2,$query3,$query4, $title,"Olympiakos",
 	</div>
 	<div id="analysis" style="display: none">
 	<h2>Analysis</h2>
-	  
+
+  <h3>Recommendation engine</h3>
   <p>Below, we show the betting recommendations (betting company - team pairs) obtained from the maximum matching algorithm. Notice that for each company, it is shown the team whose match result is more predictable. Then, when betting, the better option is to bet for the lowest betting odd of the match where that teams is playing.</p>
 
   <p>This table shows the most safe combination of betting companies - teams.</p>
@@ -170,6 +171,8 @@ query_and_print_more_series($query,$query2,$query3,$query4, $title,"Olympiakos",
 	query_and_print_table($query,$title);
 	echo "";
 ?>
+
+<h3>Forcasting the result of a match</h3>
 <p> We want to look at how betting companies design their match odds based on pre-match factors, and then look at how these can be used to model the result.</p>
 
 <p> We regressed, using a beta regression for match odds and a binomial GLM for match prediction, against the position in the table before the match and for the last season, dividing the standing into "ranks". Then also adding in this information for the opposition team. Goals scored and where the match was played, was also considered.</p>
