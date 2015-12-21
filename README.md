@@ -34,7 +34,7 @@ The `R` analysis relies on the following package.
 - `coda`
 - `dplyr`
 - `ggplot2`
-- `RmySQL`
+- `RMySQL`
 
 
 ## Acknowledgments
